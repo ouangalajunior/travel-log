@@ -30,6 +30,9 @@ import { TripCreateComponent } from './trip/trip-create/trip-create.component';
 import { TripEditComponent } from './trip/trip-edit/trip-edit.component';
 import { TripListComponent } from './trip/trip-list/trip-list.component';
 import { TripDetailComponent } from './trip/trip-detail/trip-detail.component';
+import { UserListComponent } from './users/user-list/user-list.component';
+import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
 
 
 
@@ -57,6 +60,9 @@ import { TripDetailComponent } from './trip/trip-detail/trip-detail.component';
     TripEditComponent,
     TripListComponent,
     TripDetailComponent,
+    UserListComponent,
+    UserDetailsComponent,
+    UserEditComponent,
     
     
     //TripSearchComponent,

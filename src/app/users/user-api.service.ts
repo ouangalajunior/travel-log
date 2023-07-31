@@ -23,4 +23,19 @@ export class UserApiService {
     return this.http.post<any>(`${environment.apiUrl}/users`, user);
   }
 
+  retrieveUser(id: string): Observable<User> {
+    return this.http.get<User>(`${environment.apiUrl}/users/${id}`, )
+    
+  }
+
+  
+  deleteUser(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/users/${id}`);
+  }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.patch<User>(`${environment.apiUrl}/users/${user.id}`,user);
+  }
+  
+
 }

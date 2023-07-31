@@ -1,0 +1,21 @@
+<div class="container ">
+    <a routerLink="/user-list">
+        <button class="btn btn-secondary ">Back</button>
+
+    </a>
+    <ng-container *ngIf="user">
+        <h2>{{user.name}}</h2>
+        <p>Number of trips: {{user.tripsCount}}</p>
+        <p>User creation date: {{user.createdAt | date}}</p>
+        <p>User update: {{user.updatedAt | date}}</p>
+
+
+    </ng-container>
+    <div class="button-container" *ngIf="user">
+        <a routerLink="/user-edit/{{user.id}}">
+            <button class="btn btn-secondary ">Edit</button>
+        </a>
+
+        <button (click)="deleteUser(user)" class="btn btn-secondary  m-3"> Delete</button>
+    </div>
+</div>

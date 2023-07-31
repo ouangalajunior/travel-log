@@ -9,7 +9,7 @@
     <form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
       <div class="mb-3 form-group">
         <label for="username" class="form-label">Username</label>
-        <input type="text" name="username"  class="form-control" id="username" #usernameField="ngModel" required
+        <input type="text" name="username"  class="form-control w-50" id="username" #usernameField="ngModel" required
           [(ngModel)]="authRequestInput.username" />
         <p *ngIf="usernameField.hasError('required') && usernameField.touched">
           Username is required
@@ -17,7 +17,7 @@
       </div>
       <div>
         <label for="password">Password</label>
-        <input type="password" name="password" class="form-control" id="passwrod" #passwordField="ngModel" required
+        <input type="password" name="password" class="form-control w-50" id="passwrod" #passwordField="ngModel" required
           [(ngModel)]="authRequestInput.password" />
         <p *ngIf="passwordField.hasError('required') && passwordField.touched">
           Password is required

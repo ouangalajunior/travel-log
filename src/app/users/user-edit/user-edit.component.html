@@ -1,23 +1,22 @@
-<div class="container">
-    <h1> Travel Log v2</h1>
-    
-</div>
-
 
 <div class="container bg-light p-5">
+    <a routerLink="/user-list/{{user!.id}}">
+        <button class="btn btn-secondary ">Back</button>
 
-    <h2>Register new User</h2>
-    <form (submit)="registerUser()">
+    </a>
+
+    <h2>Update User</h2>
+    <form (submit)="updateUser()">
         <div class="mb-3 form-group">
             <!--We keep the label as Username instead of name. -->
             <label for="name" class="form-label">Username</label>
-            <input type="text" class="form-control w-50" name="name" id="name" #titleField="ngModel" required [(ngModel)]="newUser.name" />
+            <input type="text" class="form-control w-50" name="name" id="name" #titleField="ngModel" required [(ngModel)]="user!.name" />
 
         </div>
         <div>
             <label for="password" class="form-label">Password</label>
             <input type="password"  class="form-control w-50" name="password" id="password" #descriptionField="ngModel" required
-                [(ngModel)]="newUser.password" />
+                [(ngModel)]="user!.password" />
 
         </div>
 
@@ -26,5 +25,5 @@
 
         </div>
     </form>
-    Already have an account? Please login <a href="/login">here</a>
+    
 </div>

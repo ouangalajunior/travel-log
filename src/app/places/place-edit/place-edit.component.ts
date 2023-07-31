@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PlaceData, Place } from '../place.model';
+import { PlaceData, } from '../place.model';
 import { PlaceApiService } from '../place-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 

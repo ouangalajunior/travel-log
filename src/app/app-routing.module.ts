@@ -18,6 +18,9 @@ import { TripCreateComponent } from './trip/trip-create/trip-create.component';
 import { TripListComponent } from './trip/trip-list/trip-list.component';
 import { TripDetailComponent } from './trip/trip-detail/trip-detail.component';
 import { TripEditComponent } from './trip/trip-edit/trip-edit.component';
+import { UserListComponent } from './users/user-list/user-list.component';
+import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
 
 const routes: Routes = [
  // { path: "", redirectTo: "dummy", pathMatch: "full" },
@@ -59,6 +62,12 @@ const routes: Routes = [
 {path: "trip-list", component: TripListComponent},
 {path:"trip-list/:id", component: TripDetailComponent},
 {path: "trip-edit/:id", component: TripEditComponent},
+
+//users route
+{path: "user-list", component: UserListComponent},
+{path: "user-list/:id", component:UserDetailsComponent},
+{path: "user-edit/:id", component: UserEditComponent},
+
 
 
 
