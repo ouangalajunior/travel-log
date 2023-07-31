@@ -95,6 +95,10 @@ getPlacesForTrip(tripId: string): Observable<any> {
 getPlacesForTrip(tripId: string): Observable<PlaceData[]> {
   return this.http.get<PlaceData[]>(`${environment.apiUrl}/places?tripId=${tripId}`);
 }
-
+getTripsByCurrentUser(userId: string): Observable<TripData[]> {
+  return this.http.get<TripData[]>(`${environment.apiUrl}/trips`).pipe(
+    map((trips) => trips.filter((trip) => trip.userId === userId))
+  );
+}
 
 }

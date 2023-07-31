@@ -21,6 +21,7 @@ import { TripEditComponent } from './trip/trip-edit/trip-edit.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { MyTripComponent } from './trip/my-trip/my-trip.component';
 
 const routes: Routes = [
  // { path: "", redirectTo: "dummy", pathMatch: "full" },
@@ -62,11 +63,13 @@ const routes: Routes = [
 {path: "trip-list", component: TripListComponent},
 {path:"trip-list/:id", component: TripDetailComponent},
 {path: "trip-edit/:id", component: TripEditComponent},
+{path: "mytrip", component: MyTripComponent},
 
 //users route
 {path: "user-list", component: UserListComponent},
 {path: "user-list/:id", component:UserDetailsComponent},
 {path: "user-edit/:id", component: UserEditComponent},
+
 
 
 

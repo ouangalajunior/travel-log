@@ -33,6 +33,8 @@ import { TripDetailComponent } from './trip/trip-detail/trip-detail.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { UserCurrentComponent } from './users/user-current/user-current.component';
+import { MyTripComponent } from './trip/my-trip/my-trip.component';
 
 
 
@@ -63,6 +65,8 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
     UserListComponent,
     UserDetailsComponent,
     UserEditComponent,
+    UserCurrentComponent,
+    MyTripComponent,
     
     
     //TripSearchComponent,

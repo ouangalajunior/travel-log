@@ -1,0 +1,25 @@
+<div class="container" *ngIf="currentUser">
+    <h2>Welcome, {{ currentUser.name }}!</h2>
+
+    <ng-container *ngIf="currentUser.trips && currentUser.trips.length > 0">
+        <h3>Your Trips:</h3>
+        <ul>
+            <li   class="text-decoration-none fs-5 text-secondary" *ngFor="let trip of currentUser.trips">
+                <a routerLink="/trip-list/{{trip.id}}">
+                    {{ trip.title }} - {{ trip.description }}
+                </a>
+            </li>
+        </ul>
+
+
+    </ng-container>
+
+
+
+
+
+
+    <ng-container *ngIf="!currentUser.trips || currentUser.trips.length === 0">
+        <p>You have no trips yet.</p>
+    </ng-container>
+</div>

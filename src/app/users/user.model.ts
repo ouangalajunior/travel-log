@@ -1,3 +1,4 @@
+import { TripData } from "../trip/trip.model";
 export type User = {
     id?: string;
     href ?: string;
@@ -6,4 +7,5 @@ export type User = {
     tripsCount ?: number;
     createdAt ?: string;
     updatedAt?: string;
+    trips?: TripData[]; 
   };
