@@ -1,0 +1,15 @@
+<div class="container">
+    
+    
+
+    <div class="card" style="width: 18rem;">
+        <img [src]="placeData.pictureUrl" alt="{{placeData.name}}" class="card-img-top"  />
+        
+        <div class="card-body">
+          <h5 class="card-title">{{placeData.name}}</h5>
+          <p class="card-text"> {{placeData.description}}</p>
+          
+          <a [routerLink]="['/place-details', placeData.id]">Learn More</a>
+        </div>
+      </div>
+</div>

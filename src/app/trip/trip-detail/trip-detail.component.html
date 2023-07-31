@@ -1,0 +1,36 @@
+<div class="container " >
+  <a routerLink="/trip-list">
+    <button class="btn btn-primary ">Back</button>
+
+  </a>
+  <ng-container *ngIf="tripData" >
+    <h2 >{{tripData.title}}</h2>
+    <p>{{tripData.description}}</p>
+    <p>Places visited: {{tripData.placesCount}}</p>
+    <p>Date of trip creation: {{tripData.createdAt | date}}</p>
+    <p>Last update: {{tripData.updatedAt | date}}</p>
+
+  </ng-container>
+  <div class="button-container" *ngIf="tripData">
+    <a routerLink="/trip-edit/{{tripData.id}}">
+      <button class="btn btn-primary ">Edit</button>
+    </a>
+
+    <button (click)="deleteTrip(tripData)" class="btn btn-primary  m-3"> Delete</button>
+  </div>
+
+  <div>
+    <button (click)="addPlaceToTrip() " class="btn btn-primary ">Add Place</button>
+  </div>
+
+  
+  <div>
+    <h3>Places:</h3>
+    <ul>
+      <li *ngFor="let place of places">
+        {{ place.name }} - {{ place.description }}
+        <!-- You can add more details about the place here -->
+      </li>
+    </ul>
+  </div>
+</div>

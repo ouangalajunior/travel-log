@@ -1,0 +1,30 @@
+<div class="container">
+    <h1> Travel Log v2</h1>
+    
+</div>
+
+
+<div class="container bg-light p-5">
+
+    <h2>Register new User</h2>
+    <form (submit)="registerUser()">
+        <div class="mb-3 form-group">
+            <!--We keep the label as Username instead of name. -->
+            <label for="name" class="form-label">Username</label>
+            <input type="text" class="form-control" name="name" id="name" #titleField="ngModel" required [(ngModel)]="newUser.name" />
+
+        </div>
+        <div>
+            <label for="password" class="form-label">Password</label>
+            <input type="password"  class="form-control" name="password" id="password" #descriptionField="ngModel" required
+                [(ngModel)]="newUser.password" />
+
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary my-3">Register </button>
+
+        </div>
+    </form>
+    Already have an account? Please login <a href="/login">here</a>
+</div>

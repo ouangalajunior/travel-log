@@ -1,0 +1,18 @@
+<div class=" ">
+    <app-trip
+      *ngFor="let trip of tripList"
+      [tripData]="trip">
+    </app-trip>
+  </div>
+
+  <!--
+  <div class="container">
+    <h2>Trip List</h2>
+    <div *ngFor="let trip of tripList">
+      <h3>{{ trip.title }}</h3>
+      <p>{{ trip.description }}</p>
+      <p>Places visited: {{ trip['places']?.length || 0 }}</p>
+      <a [routerLink]="['/trip-details', trip.id]">View Details</a>
+    </div>
+  </div>
+  -->

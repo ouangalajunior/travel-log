@@ -1,0 +1,19 @@
+<div class="container">
+    <div *ngIf="placeData">
+      <h2>Place Details</h2>
+      <p><strong>Name</strong> {{ placeData.name }}</p>
+      <img [src]="placeData.pictureUrl" alt="{{placeData.name}}" class="w-50"  />
+      <p><strong>Description:</strong> {{ placeData.description }}</p>
+     
+      <p>Place Created: {{placeData.createdAt | date}}</p>
+      <p>Place update: {{placeData.updatedAt | date}}</p>
+      <p>{{placeData.location}}</p>
+      <p>{{placeData.tripId}}</p>
+      <a [href]="placeData.tripHref"> See trip</a>
+      <p>{{placeData.tripHref}}</p>
+      
+     <button (click)="editPlace()" class="btn btn-primary m-3">Edit Place</button>
+    </div>
+  
+  
+  </div>

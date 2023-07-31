@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+div {
+    padding: 8px;
+}
+
+#page-wrap {
+    background-color: #EEE;
+    min-height: 100vh;
+    padding: 0;
+    width: 100vw;
+}

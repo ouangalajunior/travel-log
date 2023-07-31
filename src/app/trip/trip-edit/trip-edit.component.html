@@ -1,0 +1,30 @@
+<div class="container">
+    <a  routerLink="/trip-list/{{tripData!.id}}">
+        <button class="btn btn-secondary m-3">Back</button>
+
+    </a>
+    <h2>Edit Trip</h2>
+    <form (ngSubmit)="updateTrip()" #tripForm="ngForm">
+      <div class="mb-3">
+        <label for="trip-title" class="form-label">Title</label>
+      <input type="text"  class="form-control w-50 "  id="title" name="title" [(ngModel)]="tripData!.title" required>
+
+      </div>
+      
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+      <input type="textarea" class="form-control w-50 py-5" id="description" name="description" [(ngModel)]="tripData!.description" required/>
+  
+
+      </div>
+  
+      
+      <button type="submit" class="btn btn-secondary m-3">Update Trip</button>
+    </form>
+
+    <ng-container *ngIf="errorMessage">
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+    </ng-container>
+  </div>

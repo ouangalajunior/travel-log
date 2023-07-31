@@ -1,0 +1,51 @@
+<div class="container">
+    <h2>Edit Place</h2>
+    <form (ngSubmit)="updatePlace()" #createForm="ngForm">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text"  class="form-control w-50" id="name" name="name" required [(ngModel)]="placeData!.name" />
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" class="form-control w-50" class="form-control w-50" name="description" required [(ngModel)]="placeData!.description"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="latitude" class="form-label">Latitude</label>
+            <input type="number" class="form-control w-50" id="latitude" name="latitude" required
+                [(ngModel)]="placeData!.location.coordinates[1]" />
+        </div>
+        <div class="mb-3">
+            <label for="longitude" class="form-label">Longitude</label>
+            <input type="number" class="form-control w-50" id="longitude" name="longitude" required
+                [(ngModel)]="placeData!.location.coordinates[0]" />
+        </div>
+
+        <div class="mb-3">
+            <label for="tripId" class="form-label">Trip Id</label>
+            <input type="text" class="form-control w-50" id="tripId" name="tripId" [ngModel]="placeData!.tripId" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label for="tripHref" class="form-label">Trip Href</label>
+            <input type="text" class="form-control w-50" id="tripHref" name="tripHref" [ngModel]="placeData!.tripHref" readonly />
+            
+        </div>
+        <!--
+      <div class="form-group">
+        <label for="tripId">Trip Id:</label>
+        <input type="text" id="tripId" name="tripId"  [(ngModel)]="newPlace.tripId" />
+      </div>
+
+      <div class="form-group">
+        <label for="tripHref">Trip Href:</label>
+        <input type="text" id="tripHref" name="tripHref"  [(ngModel)]="newPlace.tripHref" />
+      </div>
+-->
+        <div class="mb-3">
+            <label for="pictureUrl" class="form-label">Picture</label>
+            <input type="text" class="form-control w-50" id="pictureUrl" name="pictureUrl" [(ngModel)]="placeData!.pictureUrl" />
+        </div>
+
+        <button type="submit" class="btn btn-primary m-3">Update Place</button>
+        </form>
+</div>
