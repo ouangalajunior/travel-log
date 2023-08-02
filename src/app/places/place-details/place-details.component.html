@@ -7,10 +7,13 @@
      
       <p>Place Created: {{placeData.createdAt | date}}</p>
       <p>Place update: {{placeData.updatedAt | date}}</p>
-      <p>{{placeData.location}}</p>
-      <p>{{placeData.tripId}}</p>
+      
       <a [href]="placeData.tripHref"> See trip</a>
       <p>{{placeData.tripHref}}</p>
+
+      <app-map [latitude]="placeData.location.coordinates[1]" [longitude]="placeData.location.coordinates[0]" [placeName]="placeData.name"></app-map>
+
+      
       
      <button (click)="editPlace()" class="btn btn-primary m-3">Edit Place</button>
     </div>

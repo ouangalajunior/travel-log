@@ -21,14 +21,17 @@ export class TripDetailComponent implements OnInit {
   )
   {}
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    //this.tripData =tripData.find(tripData => tripData.id === id);
+    this.retrieveTrip();
+      
+  }
 
-    if (id) { // Vérifiez que id n'est pas null avant de l'utiliser
-      this.tripService.retrieveTrip(id).subscribe(
+  retrieveTrip(): void {
+    const tripId = this.route.snapshot.paramMap.get('id');
+    if (tripId) {
+      this.tripService.retrieveTrip(tripId).subscribe(
         (tripData) => {
           this.tripData = tripData;
-          this.getPlacesForTrip(id);
+          this.getPlacesForTrip(tripId); // Call the function to get places for the trip
         },
         (error) => {
           console.error('Failed to retrieve trip details:', error);
@@ -36,7 +39,6 @@ export class TripDetailComponent implements OnInit {
         }
       );
     }
-      
   }
   deleteTrip(tripData: TripData, ): void {
       if (confirm(`Are you sure you want to delete the trip '${tripData.title}'?`)) {
@@ -66,13 +68,13 @@ addPlaceToTrip(): void {
   }
 }
 
-private getPlacesForTrip(id: string): void {
-  this.tripService.getPlacesForTrip(id).subscribe(
+getPlacesForTrip(tripId: string): void {
+  this.tripService.getPlacesForTrip(tripId).subscribe(
     (places) => {
       this.places = places;
     },
     (error) => {
-      console.error('Failed to retrieve places for the trip:', error);
+      console.error('Failed to retrieve places for trip:', error);
       // Handle error scenario, such as displaying an error message
     }
   );

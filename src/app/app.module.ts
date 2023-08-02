@@ -35,6 +35,7 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserCurrentComponent } from './users/user-current/user-current.component';
 import { MyTripComponent } from './trip/my-trip/my-trip.component';
+import { MapComponent } from './places/map/map.component';
 
 
 
@@ -67,6 +68,7 @@ import { MyTripComponent } from './trip/my-trip/my-trip.component';
     UserEditComponent,
     UserCurrentComponent,
     MyTripComponent,
+    MapComponent,
     
     
     //TripSearchComponent,
