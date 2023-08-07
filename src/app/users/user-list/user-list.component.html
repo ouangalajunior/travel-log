@@ -1,12 +1,16 @@
 <div class="container">
+  <form>
+    <input type="text" placeholder="search user" #filter>
+<button class="primary" type="button" (click)="searchUserResults(filter.value)">Search</button>
+  </form>
     <h2>User List</h2>
-    <div *ngFor="let user of userList">
+    <div *ngFor="let user of filteredUserList">
       
       <a  routerLink="/user-list/{{user.id}}">
         <h3>{{ user.name }}</h3>
 
       </a>
       
-      <!-- <a [routerLink]="['/user-list', user.id]">View User Details</a> -->
+      
     </div>
   </div>

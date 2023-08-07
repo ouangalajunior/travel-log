@@ -1,7 +1,11 @@
 <div class="container">
+    <form>
+        <input type="text" placeholder="search place" #filter>
+    <button class="primary" type="button" (click)="searchPlaceResults(filter.value)">Search</button>
+      </form>
     <h2>Place List</h2>
     <div>
-        <app-place *ngFor=" let place of placeList"
+        <app-place *ngFor=" let place of filteredPlaceList"
         [placeData]="place">
 
         </app-place>

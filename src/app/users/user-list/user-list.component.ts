@@ -10,6 +10,7 @@ import { UserApiService } from '../user-api.service';
 })
 export class UserListComponent implements OnInit {
   userList: User [] = [];
+  filteredUserList: User [] = [];
   constructor (
     private userApiService: UserApiService
   ){}
@@ -21,8 +22,25 @@ export class UserListComponent implements OnInit {
     this.userApiService.loadAllUsers$().subscribe(
     (users) => {
       this.userList= users;
+      this.filteredUserList = this.userList;
+    },
+    (error) => {
+      console.error('Failed to retrieve user list:', error);
+      // Handle error scenario, such as displaying an error message
     }
+
     );
+  }
+
+  searchUserResults(text: string ) {
+    if (!text.trim()) {
+      this.filteredUserList = this.userList;
+    } else {
+      this.filteredUserList = this.userList.filter(
+        (user) =>
+          user?.name.toLowerCase().includes(text.toLowerCase()) 
+      );
+    }
   }
 
 
