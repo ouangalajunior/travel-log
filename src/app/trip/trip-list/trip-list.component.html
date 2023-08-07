@@ -1,6 +1,11 @@
 <div class=" ">
+  <form>
+    <input type="text" placeholder="search trip" #filter>
+<button class="primary" type="button" (click)="searchTripResults(filter.value)">Search</button>
+  </form>
+
     <app-trip
-      *ngFor="let trip of tripList"
+      *ngFor="let trip of filteredTripList"
       [tripData]="trip">
     </app-trip>
   </div>

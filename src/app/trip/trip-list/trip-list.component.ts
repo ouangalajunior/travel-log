@@ -13,7 +13,8 @@ import { switchMap } from 'rxjs/operators';
 export class TripListComponent implements OnInit{
 
   tripList: TripData[] = [];
-  //tripList: TripWithPlaces[] = []; 
+  filteredTripList: TripData [] = [];
+
   constructor(
     private route: ActivatedRoute,
     private tripService: TripService,
@@ -22,17 +23,18 @@ export class TripListComponent implements OnInit{
 
   ngOnInit(): void {
     //const tripId = this.route.snapshot.params['id'];
-    const tripId = this.route.snapshot.paramMap.get('id');
-    if(tripId){
+   // const tripId = this.route.snapshot.paramMap.get('id');
+   // if(tripId){
     this.getTrips();
-    //this.getPlacesForTrips(tripId);
-  }
+    
+ // }
 }
 
   getTrips(): void {
     this.tripService.getTrips().subscribe(
       (trips) => {
         this.tripList = trips;
+        this.filteredTripList = this.tripList;
         
       },
       (error) => {
@@ -42,7 +44,17 @@ export class TripListComponent implements OnInit{
     );
   }
 
- 
+ searchTripResults(text: string ) {
+    if (!text.trim()) {
+      this.filteredTripList = this.tripList;
+    } else {
+      this.filteredTripList = this.tripList.filter(
+        (tripData) =>
+          tripData?.title.toLowerCase().includes(text.toLowerCase()) ||
+          tripData?.description.toLowerCase().includes(text.toLowerCase())
+      );
+    }
+  }
   
 
   
