@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable} from 'rxjs';
+import { Observable, map} from 'rxjs';
 import { environment } from "src/environments/environment";
 import { Place, PlaceData } from './place.model';
 
@@ -34,4 +34,9 @@ export class PlaceApiService {
     return this.http.patch<Place>(`${environment.apiUrl}/places/${place.id}`,place);
   }
   
+  getPlaceByTrip(tripId: string): Observable<PlaceData[]> {
+    return this.http.get<PlaceData[]>(`${environment.apiUrl}/places`).pipe(
+      map((places) => places.filter((place) => place.tripId === tripId))
+    );
+  }
 }

@@ -42,16 +42,7 @@ export class MapComponent implements OnInit {
       .openOn(mymap);
     
 
-      
-      
-     
-     
-    
-
-  
-
-
-  
+        
 }
 
 

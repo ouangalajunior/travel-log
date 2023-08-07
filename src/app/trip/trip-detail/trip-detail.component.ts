@@ -3,6 +3,7 @@ import { TripData } from '../trip.model';
 import { TripService } from '../trip-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PlaceData } from 'src/app/places/place.model';
+import { PlaceApiService } from 'src/app/places/place-api.service';
 
 
 @Component({
@@ -17,21 +18,34 @@ export class TripDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tripService: TripService,
+    private placeService: PlaceApiService
 
   )
   {}
   ngOnInit(): void {
+    const tripId = this.route.snapshot.paramMap.get('id');
+    if(tripId){
     this.retrieveTrip();
+    }
       
   }
 
   retrieveTrip(): void {
     const tripId = this.route.snapshot.paramMap.get('id');
-    if (tripId) {
-      this.tripService.retrieveTrip(tripId).subscribe(
+    if (tripId) {this.tripService.retrieveTrip(tripId).subscribe(
         (tripData) => {
           this.tripData = tripData;
-          this.getPlacesForTrip(tripId); // Call the function to get places for the trip
+          // Call the function to get places for the trip
+          if(tripData.id){this.placeService.getPlaceByTrip(tripData.id).subscribe(
+            (places)=>{
+              if(this.tripData){
+                this.tripData.places= places;
+              }
+            }
+          );
+
+
+          }
         },
         (error) => {
           console.error('Failed to retrieve trip details:', error);

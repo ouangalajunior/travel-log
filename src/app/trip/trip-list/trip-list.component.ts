@@ -12,8 +12,8 @@ import { switchMap } from 'rxjs/operators';
 })
 export class TripListComponent implements OnInit{
 
-  //tripList: TripData[] = [];
-  tripList: TripWithPlaces[] = []; 
+  tripList: TripData[] = [];
+  //tripList: TripWithPlaces[] = []; 
   constructor(
     private route: ActivatedRoute,
     private tripService: TripService,
@@ -21,10 +21,13 @@ export class TripListComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    const tripId = this.route.snapshot.params['id'];
+    //const tripId = this.route.snapshot.params['id'];
+    const tripId = this.route.snapshot.paramMap.get('id');
+    if(tripId){
     this.getTrips();
-    this.getPlacesForTrips(tripId);
+    //this.getPlacesForTrips(tripId);
   }
+}
 
   getTrips(): void {
     this.tripService.getTrips().subscribe(
@@ -39,19 +42,7 @@ export class TripListComponent implements OnInit{
     );
   }
 
-  private getPlacesForTrips(tripId: string): void {
-    this.tripList.forEach((trip) => {
-      this.tripService.getPlacesForTrip(tripId).subscribe(
-        (places) => {
-          trip.places = places; // Use the 'places' property from the new interface
-        },
-        (error) => {
-          console.error('Failed to retrieve places for trip ' + trip.id + ':', error);
-          // Handle error scenario, such as displaying an error message
-        }
-      );
-    });
-  }
+ 
   
 
   

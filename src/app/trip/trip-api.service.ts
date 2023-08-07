@@ -108,4 +108,10 @@ getTripsByCurrentUser(userId: string): Observable<TripData[]> {
   );
 }
 
+getTripsByAllUser(userId: string): Observable<TripData[]> {
+  return this.http.get<TripData[]>(`${environment.apiUrl}/trips`).pipe(
+    map((trips) => trips.filter((trip) => trip.userId === userId))
+  );
+}
+
 }

@@ -11,6 +11,7 @@
 
 
     </ng-container>
+
     <div class="button-container" *ngIf="user">
         <a routerLink="/user-edit/{{user.id}}">
             <button class="btn btn-secondary ">Edit</button>
@@ -18,4 +19,33 @@
 
         <button (click)="deleteUser(user)" class="btn btn-secondary  m-3"> Delete</button>
     </div>
+</div>
+
+
+
+
+<div class="container" *ngIf="user">
+    <h2>Welcome, {{ user.name }}!</h2>
+
+    <ng-container *ngIf="user.trips && user.trips.length > 0">
+        <h3>Your Trips:</h3>
+        <ul>
+            <li   class="text-decoration-none fs-5 text-secondary" *ngFor="let trip of user.trips">
+                <a routerLink="/trip-list/{{trip.id}}">
+                    {{ trip.title }} 
+                </a>
+            </li>
+        </ul>
+
+
+    </ng-container>
+
+
+
+
+
+
+    <ng-container *ngIf="!user.trips || user.trips.length === 0">
+        <p>You have no trips yet.</p>
+    </ng-container>
 </div>
