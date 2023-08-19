@@ -1,49 +1,55 @@
-import { Component, Input,  } from '@angular/core';
+import { Component, Input, OnInit  } from '@angular/core';
 import { TripData } from 'src/app/trip/trip.model';
 import { TripService } from './trip-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlaceApiService } from '../places/place-api.service';
 import { PlaceData } from '../places/place.model';
+// Import user data for tripv2 list test
+import { User } from '../users/user.model';
+import { UserApiService } from '../users/user-api.service';
 
 @Component({
   selector: 'app-trip',
   templateUrl: './trip.component.html',
   styleUrls: ['./trip.component.css']
 })
-export class TripComponent  {
+export class TripComponent implements OnInit  {
   @Input() tripData!: TripData;
   placesList: PlaceData[] = []; // List of places associated with the trip
-
+  user: User| undefined;
+  place: PlaceData [] = [];
+  
   constructor(
-    private tripService: TripService,
+    private userService: UserApiService,
     private placeService: PlaceApiService,
+    private route: ActivatedRoute,
     private router: Router,
-    private route: ActivatedRoute
+    
   ) {}
-
-  /*
   ngOnInit(): void {
-    const tripId = this.route.snapshot.params['id'];
-    this.tripService.retrieveTrip(tripId).subscribe(
-      (trip) => {
-        this.tripData = trip;
-        
-      },
-      (error) => {
-        console.error('Failed to retrieve trip details:', error);
-        // Handle error scenario, such as displaying an error message
-      }
-    );
+    this.retrieveUser();
+
+    
   }
 
-  addPlaceToTrip(): void {
-    if (this.tripData) {
-      this.router.navigate(['/create-place'], {
-        queryParams: { tripId: this.tripData.id, tripHref: this.tripData.href }
-      });
+  
+//Methode to retrieve user and associate it to trip
+  retrieveUser(): void {
+    if (this.tripData.userId) {
+      this.userService.retrieveUser(this.tripData.userId).subscribe(
+        (user) => {
+          this.user = user;
+        },
+        (error) => {
+          console.error('Failed to retrieve user:', error);
+        }
+      );
     }
+
+   
   }
-  */
+
+
 
   
 }

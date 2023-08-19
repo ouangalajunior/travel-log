@@ -1,22 +1,25 @@
 <div class="container" *ngIf="currentUser">
-    <h2>Welcome, {{ currentUser.name }}!</h2>
+    <h2>{{ currentUser.name }}'trips list</h2>
 
     <ng-container *ngIf="currentUser.trips && currentUser.trips.length > 0">
-        <h3>Your Trips:</h3>
-        <ul>
-            <li   class="text-decoration-none fs-5 text-secondary" *ngFor="let trip of currentUser.trips">
-                <a routerLink="/trip-list/{{trip.id}}">
-                    {{ trip.title }} - {{ trip.description }}
-                </a>
-            </li>
-        </ul>
+       
 
+        <div  class="text-decoration-none fs-5 text-secondary" *ngFor="let trip of currentUser.trips">
+            <a class="text-decoration-none fs-5 text-secondary " routerLink="/trip-list/{{trip.id}}">
+                <div class="bg-light p-2 w-50">
+                  <div>
+                    <h3>{{ trip.title }} </h3>
+                    <p> {{ trip.description | slice:0:50 }}</p>
+            
+                  </div>
+                </div>
+            
+              </a>
+
+        </div>
+  
 
     </ng-container>
-
-
-
-
 
 
     <ng-container *ngIf="!currentUser.trips || currentUser.trips.length === 0">

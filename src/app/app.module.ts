@@ -13,7 +13,7 @@ import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ApiTokenInterceptorService } from "./auth/api-token-interceptor.service";
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -36,6 +36,21 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserCurrentComponent } from './users/user-current/user-current.component';
 import { MyTripComponent } from './trip/my-trip/my-trip.component';
 import { MapComponent } from './places/map/map.component';
+import { TripListV2Component } from './trip/trip-list-v2/trip-list-v2.component';
+
+//Material module for tripv2 test
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TripListV3Component } from './trip/trip-list-v3/trip-list-v3.component';
+import { CreatePlaceV2Component } from './places/create-place-v2/create-place-v2.component';
+import { MapCreateComponent } from './places/map-create/map-create.component';
+import { MapService } from './places/map.service';
+
 
 
 
@@ -69,6 +84,10 @@ import { MapComponent } from './places/map/map.component';
     UserCurrentComponent,
     MyTripComponent,
     MapComponent,
+    TripListV2Component,
+    TripListV3Component,
+    CreatePlaceV2Component,
+    MapCreateComponent,
     
     
     //TripSearchComponent,
@@ -79,7 +98,15 @@ import { MapComponent } from './places/map/map.component';
     HttpClientModule,
     AuthModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
+    MatInputModule,
+    MatPaginatorModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
     
    
   ],
@@ -89,6 +116,7 @@ import { MapComponent } from './places/map/map.component';
       useClass: ApiTokenInterceptorService,
       multi: true,
     },
+    MapService
   ],
   bootstrap: [AppComponent]
 })

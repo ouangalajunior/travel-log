@@ -1,13 +1,29 @@
 <div class="container">
-    <form>
-        <input type="text" placeholder="search place" #filter>
-    <button class="primary" type="button" (click)="searchPlaceResults(filter.value)">Search</button>
-      </form>
+    <mat-form-field>
+        <input matInput [formControl]="searchControl" placeholder="Search places">
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-label>Sorting</mat-label>
+        <mat-select [formControl]="sortingControl">
+          <mat-option value="">-Select-</mat-option>
+    
+          <mat-option value="createdAt">By place creation Date (Ascending)</mat-option>
+          <mat-option value="-createdAt">By place creation Date (Descending)</mat-option>
+          <mat-option value="name">Place name (Ascending)</mat-option>
+          <mat-option value="-name">Place name (Descending)</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    
+    <mat-paginator [length]="paginator ? paginator.length : 0" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+
     <h2>Place List</h2>
     <div>
-        <app-place *ngFor=" let place of filteredPlaceList"
+        <app-place *ngFor=" let place of placeList"
         [placeData]="place">
 
         </app-place>
     </div>
-</div>

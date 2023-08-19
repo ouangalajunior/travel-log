@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map} from 'rxjs';
 import { environment } from "src/environments/environment";
 import { Place, PlaceData } from './place.model';
@@ -39,4 +39,19 @@ export class PlaceApiService {
       map((places) => places.filter((place) => place.tripId === tripId))
     );
   }
+//service get method for place search and sort
+  getPlaceSearch(sort: string, page: number, pageSize: number, search?: string,): Observable<HttpResponse<PlaceData[]>> {
+    let url = `${environment.apiUrl}/places?page=${page}&pageSize=${pageSize}`;
+
+    if (sort) {
+      url += `&sort=${sort}`;
+    }
+
+    if (search) {
+      url += `&search=${search}`;
+    }
+
+    return this.http.get<PlaceData[]>(url, { observe: 'response' });
+  }
+
 }

@@ -1,61 +1,76 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TripData } from '../trip.model';
 import { TripService } from '../trip-api.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { TripWithPlaces } from '../trip.model';
-import { switchMap } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+
 
 @Component({
   selector: 'app-trip-list',
   templateUrl: './trip-list.component.html',
   styleUrls: ['./trip-list.component.css']
 })
-export class TripListComponent implements OnInit{
-
+export class TripListComponent implements OnInit {
+  
   tripList: TripData[] = [];
-  filteredTripList: TripData [] = [];
+  sortingControl = new FormControl();
+  searchControl = new FormControl();
+  totalItems: number = 0;
+
+
+
+  //Pagination variable declaration
+  currentPage: number = 1;
+  pageSize: number = 10;
+  sortValue: string = '';
+  searchValue: string = '';
+  titleValue: string = '';
+
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
   constructor(
-    private route: ActivatedRoute,
+    
     private tripService: TripService,
-    private router: Router
-  ) {}
+    
+    
+    ) { }
 
   ngOnInit(): void {
-    //const tripId = this.route.snapshot.params['id'];
-   // const tripId = this.route.snapshot.paramMap.get('id');
-   // if(tripId){
-    this.getTrips();
-    
- // }
-}
+    this.sortingControl.valueChanges.subscribe((value) => {
+      this.sortValue = value;
+      this.getTrips();
+    });
+    this.searchControl.valueChanges.subscribe((searchValue) => {
+      this.searchValue = searchValue;
+      this.getTrips();
+    });
+     // Initial call to get the trip list without any search or sorting
+  this.getTrips();
+  }
 
   getTrips(): void {
-    this.tripService.getTrips().subscribe(
-      (trips) => {
-        this.tripList = trips;
-        this.filteredTripList = this.tripList;
-        
-      },
-      (error) => {
-        console.error('Failed to retrieve trip list:', error);
-        // Handle error scenario, such as displaying an error message
-      }
-    );
-  }
-
- searchTripResults(text: string ) {
-    if (!text.trim()) {
-      this.filteredTripList = this.tripList;
-    } else {
-      this.filteredTripList = this.tripList.filter(
-        (tripData) =>
-          tripData?.title.toLowerCase().includes(text.toLowerCase()) ||
-          tripData?.description.toLowerCase().includes(text.toLowerCase())
-      );
-    }
+    this.tripService.getTripSearch(this.sortValue, this.currentPage, this.pageSize, this.searchValue, )
+      .subscribe((response) => {
+        this.tripList = response.body || [];
+  
+        // Update pagination variables based on response headers
+        this.totalItems = parseInt(response.headers.get('Pagination-Filtered-Total') || '0', 10);
+        this.currentPage = parseInt(response.headers.get('Pagination-Page') || '1', 10);
+        this.pageSize = parseInt(response.headers.get('Pagination-Page-Size') || this.pageSize.toString(), 10);
+  
+        // Update the paginator length based on the total count
+        if (this.paginator) {
+          this.paginator.length = this.totalItems;
+        }
+      });
   }
   
+
+  onPageChange(e: PageEvent) {
+    this.currentPage = e.pageIndex + 1;
+    this.pageSize = e.pageSize;
+    this.getTrips();
+  }
 
   
 }

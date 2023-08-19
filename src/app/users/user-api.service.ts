@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpClient, HttpResponse } from "@angular/common/http";
+import { Observable, map } from "rxjs";
 import { User } from "./user.model";
 import { environment } from "src/environments/environment";
 
@@ -12,8 +12,8 @@ import { environment } from "src/environments/environment";
 })
 
 export class UserApiService {
-  
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) { }
 
   loadAllUsers$(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.apiUrl}/users`);
@@ -24,18 +24,42 @@ export class UserApiService {
   }
 
   retrieveUser(id: string): Observable<User> {
-    return this.http.get<User>(`${environment.apiUrl}/users/${id}`, )
-    
+    return this.http.get<User>(`${environment.apiUrl}/users/${id}`,)
+
   }
 
-  
+
   deleteUser(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}/users/${id}`);
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.patch<User>(`${environment.apiUrl}/users/${user.id}`,user);
+    return this.http.patch<User>(`${environment.apiUrl}/users/${user.id}`, user);
   }
-  
+
+  getUserForTrip(tripId: string): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiUrl}/users?tripId=${tripId}`);
+
+  }
+
+//service get method for user search and sort
+  getUserSearch(sort: string, page: number, pageSize: number, search?: string,): Observable<HttpResponse<User[]>> {
+    let url = `${environment.apiUrl}/users?page=${page}&pageSize=${pageSize}`;
+
+    if (sort) {
+      url += `&sort=${sort}`;
+    }
+
+    if (search) {
+      url += `&search=${search}`;
+    }
+
+    return this.http.get<User[]>(url, { observe: 'response' });
+  }
+
 
 }
+
+  
+  
+

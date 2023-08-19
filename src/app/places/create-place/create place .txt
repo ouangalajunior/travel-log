@@ -1,0 +1,219 @@
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Place } from '../place.model';
+import { PlaceApiService } from '../place-api.service';
+import { ActivatedRoute, Router } from '@angular/router';
+declare const L: any;
+
+@Component({
+  selector: 'app-create-place',
+  templateUrl: './create-place.component.html',
+  styleUrls: ['./create-place.component.css']
+})
+export class CreatePlaceComponent implements OnInit {
+/*
+  newPlace: Place = {
+    name: '',
+    description: '',
+    location: { type: 'Point', coordinates: [0, 0] }, // Set initial GeoJsonPoint coordinates
+    tripId: '', // Fill this with the appropriate trip ID
+    tripHref: '', // Fill this with the appropriate trip Href
+    pictureUrl: ''
+  };
+*/
+
+locationForm: FormGroup = this.formBuilder.group({
+  name: [''],          // Added name field
+  description: [''],   // Added description field
+  latitude: [''],
+  longitude: [''],
+  tripId: [''],// Fill this with the appropriate trip ID
+  tripHref: [''], // Fill this with the appropriate trip Href
+  pictureUrl: [''],
+});
+map: any;
+marker: any;
+
+  constructor (
+    private placeService: PlaceApiService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    ) {}
+
+    ngOnInit(): void {
+      this.route.queryParams.subscribe((params) => {
+        this.locationForm.patchValue({
+          tripId: params['tripId'] || '',         // Automatically fill tripId field
+          tripHref: params['tripHref'] || ''     // Automatically fill tripHref field
+        });
+      });
+
+      if (!navigator.geolocation) {
+        console.log('Location is not supported');
+      }
+  
+      this.initMap();
+    }
+
+    createPlace(): void {
+      const formData = this.locationForm.value;
+  
+      const newPlace: Place= {
+        name: formData.name,
+        description: formData.description,
+        location: {
+          type: "Point",
+          coordinates: [formData.longitude, formData.latitude]
+        },
+        tripId: formData.tripId, // Fill this with the appropriate trip ID
+        tripHref: formData.tripHref, // Fill this with the appropriate trip Href
+        pictureUrl: formData.pictureUrl
+      };
+  
+  
+      // Call the API service to create a new place
+    this.placeService.createPlace(newPlace).subscribe(
+      (createdPlace) => {
+        console.log('Place created:', createdPlace);
+        // Reset the form after successful creation
+        this.locationForm.reset();
+      },
+      (error) => {
+        console.error('Error creating place:', error);
+      }
+    );
+      // Here you can submit the form data to your backend or perform any desired action
+      console.log('Form submitted:', formData);
+    }
+  
+  
+/*
+createPlace(): void {
+  this.placeService.createPlace(this.newPlace).subscribe(
+    (createdPlace) => {
+      console.log('Place created successfully:', createdPlace);
+      // Optionally, navigate to the place details page or any other action after successful creation
+      this.newPlace = {
+        name: '',
+        description: '',
+        location: { type: 'Point', coordinates: [0, 0] },
+        tripId: this.newPlace.tripId, // Set tripId from newPlace object
+        tripHref: this.newPlace.tripHref, // Set tripHref from newPlace object
+        pictureUrl: ''
+      };
+    },
+    (error) => {
+      console.error('Failed to create place:', error);
+      // Handle error scenario, such as displaying an error message
+    }
+  );
+}
+*/
+
+
+
+
+initMap(): void {
+  navigator.geolocation.getCurrentPosition((position) => {
+    const coords = position.coords;
+    const latLong = [coords.latitude, coords.longitude];
+
+    this.map = L.map('map').setView(latLong, 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap'
+    }).addTo(this.map);
+
+    this.marker = L.marker(latLong, { draggable: true }).addTo(this.map);
+
+    this.marker.on('dragend', (event: any) => {
+      const updatedLatLng = event.target.getLatLng();
+      this.locationForm.patchValue({
+        latitude: updatedLatLng.lat,
+        longitude: updatedLatLng.lng
+      });
+    });
+    // Create the popup content
+    const popupContent = `Coordinates: ${latLong[0]}, ${latLong[1]}<br>Place Name`;
+
+    // Attach the popup to the marker on mouseover
+    this.marker.on('mouseover', () => {
+      this.marker.bindPopup(popupContent).openPopup();
+    });
+
+    this.marker.on('mouseout', () => {
+      this.marker.closePopup(); // Explicitly close the popup
+    });
+
+    /*
+    this.marker.bindPopup(`Coordinates: ${latLong[0]}, ${latLong[1]}<br>Place Name`).openPopup();
+
+    let popup = L.popup()
+      .setLatLng(latLong)
+      .setContent('Place Name')
+      .openOn(this.map);
+*/
+    // Set form values
+    this.locationForm.patchValue({
+      name: '',           // Initialize name field
+      description: '',    // Initialize description field
+      latitude: coords.latitude,
+      longitude: coords.longitude
+    });
+  });
+}
+
+ngOnChanges(changes: SimpleChanges): void {
+  if (changes['latitude']) {
+    this.locationForm.patchValue({ latitude: changes['latitude'].currentValue });
+  }
+  if (changes['longitude']) {
+    this.locationForm.patchValue({ longitude: changes['longitude'].currentValue });
+  }
+  if (changes['placeData']) {
+    const newPlaceData = changes['placeData'].currentValue;
+    if (newPlaceData) {
+      this.locationForm.patchValue({
+        name: newPlaceData.name,
+        description: newPlaceData.description,
+        latitude: newPlaceData.location.coordinates[1],
+        longitude: newPlaceData.location.coordinates[0]
+      });
+    }
+  }
+}
+
+    
+    
+
+
+  
+}
+
+
+<div>
+  <h2>Location Form</h2>
+  <form [formGroup]="locationForm" (ngSubmit)="createPlace()">
+      <label for="name">Name:</label>
+  <input type="text" id="name" formControlName="name" />
+
+  <label for="description">Description:</label>
+  <textarea id="description" formControlName="description"></textarea>
+  <label for="tripId">TripId:</label>
+  <textarea id="tripId" formControlName="tripId"></textarea>
+  <label for="description">Picture</label>
+  <textarea id="pictureUrl" formControlName="pictureUrl"></textarea>
+
+      <label for="latitude">Latitude:</label>
+      <input type="text" id="latitude" formControlName="latitude" />
+
+      <label for="longitude">Longitude:</label>
+      <input type="text" id="longitude" formControlName="longitude" />
+      <button type="submit">Submit</button>
+  </form>
+  <div id="map" style="height: 400px; width: 50%;"></div>
+</div>
+
+
+

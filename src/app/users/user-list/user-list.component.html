@@ -1,16 +1,43 @@
 <div class="container">
-  <form>
-    <input type="text" placeholder="search user" #filter>
-<button class="primary" type="button" (click)="searchUserResults(filter.value)">Search</button>
-  </form>
-    <h2>User List</h2>
-    <div *ngFor="let user of filteredUserList">
-      
-      <a  routerLink="/user-list/{{user.id}}">
+  <mat-form-field>
+    <input matInput [formControl]="searchControl" placeholder="Search traveler">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Sorting</mat-label>
+    <mat-select [formControl]="sortingControl">
+      <mat-option value="">-Select-</mat-option>
+
+      <mat-option value="createdAt">By traveler creation Date (Ascending)</mat-option>
+      <mat-option value="-createdAt">By traveler creation Date (Descending)</mat-option>
+      <mat-option value="name">Traveler (Ascending)</mat-option>
+      <mat-option value="-name">Traveler (Descending)</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<mat-paginator [length]="paginator ? paginator.length : 0" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]"
+  (page)="onPageChange($event)">
+</mat-paginator>
+
+
+
+
+
+
+<div class="container">
+  <h2>Traveler list</h2>
+</div>
+
+<div class="container" *ngFor="let user of userList">
+
+  <a class="text-decoration-none fs-5 text-secondary " routerLink="/user-list/{{user.id}}">
+    <div class="bg-light p-2 w-50">
+      <div>
         <h3>{{ user.name }}</h3>
 
-      </a>
-      
-      
+      </div>
     </div>
-  </div>
+
+  </a>
+</div>

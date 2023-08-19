@@ -22,6 +22,9 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { MyTripComponent } from './trip/my-trip/my-trip.component';
+import { TripListV2Component } from './trip/trip-list-v2/trip-list-v2.component';
+import { TripListV3Component } from './trip/trip-list-v3/trip-list-v3.component';
+import { CreatePlaceV2Component } from './places/create-place-v2/create-place-v2.component';
 
 const routes: Routes = [
  // { path: "", redirectTo: "dummy", pathMatch: "full" },
@@ -64,6 +67,10 @@ const routes: Routes = [
 {path:"trip-list/:id", component: TripDetailComponent},
 {path: "trip-edit/:id", component: TripEditComponent},
 {path: "mytrip", component: MyTripComponent},
+
+{path:"trip-listv2", component: TripListV2Component},
+{path:"trip-listv3", component: TripListV3Component},
+{path: "create-placev2", component: CreatePlaceV2Component},
 
 //users route
 {path: "user-list", component: UserListComponent},

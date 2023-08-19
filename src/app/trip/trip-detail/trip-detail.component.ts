@@ -4,7 +4,8 @@ import { TripService } from '../trip-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PlaceData } from 'src/app/places/place.model';
 import { PlaceApiService } from 'src/app/places/place-api.service';
-
+import { UserApiService } from 'src/app/users/user-api.service';
+import { User } from 'src/app/users/user.model';
 
 @Component({
   selector: 'app-trip-detail',
@@ -14,84 +15,98 @@ import { PlaceApiService } from 'src/app/places/place-api.service';
 export class TripDetailComponent implements OnInit {
   tripData: TripData | undefined;
   places: PlaceData[] = [];
-  constructor (
+  user: User[] = [];
+  constructor(
     private route: ActivatedRoute,
     private router: Router,
     private tripService: TripService,
-    private placeService: PlaceApiService
+    private placeService: PlaceApiService,
+    
 
-  )
-  {}
+  ) { }
   ngOnInit(): void {
     const tripId = this.route.snapshot.paramMap.get('id');
-    if(tripId){
-    this.retrieveTrip();
+    if (tripId) {
+      this.retrieveTrip();
+
     }
-      
+
   }
 
   retrieveTrip(): void {
     const tripId = this.route.snapshot.paramMap.get('id');
-    if (tripId) {this.tripService.retrieveTrip(tripId).subscribe(
+    if (tripId) {
+      this.tripService.retrieveTrip(tripId).subscribe(
         (tripData) => {
           this.tripData = tripData;
           // Call the function to get places for the trip
-          if(tripData.id){this.placeService.getPlaceByTrip(tripData.id).subscribe(
-            (places)=>{
-              if(this.tripData){
-                this.tripData.places= places;
+          if (tripData.id) {
+            this.placeService.getPlaceByTrip(tripData.id).subscribe(
+              (places) => {
+                if (this.tripData) {
+                  this.tripData.places = places;
+                }
               }
-            }
-          );
 
+            );
+
+         
 
           }
-        },
-        (error) => {
-          console.error('Failed to retrieve trip details:', error);
-          // Handle error scenario, such as displaying an error message
-        }
-      );
-    }
-  }
-  deleteTrip(tripData: TripData, ): void {
-      if (confirm(`Are you sure you want to delete the trip '${tripData.title}'?`)) {
-        if (tripData.id) {
-          this.tripService.deleteTrip(tripData.id)
-            .subscribe(() => {
-              console.log(`Trip '${tripData.title}' deleted successfully.`);
-              this.router.navigateByUrl('/trip-list');
-             
-            });
-        } else {
-          console.error('Trip ID is missing.');
-        }
-      }
 
+           
+              },
+              (error) => {
+                console.error('Failed to retrieve trip details:', error);
+                // Handle error scenario, such as displaying an error message
+              }
+            );
+          }
+        }
       
-
   
+  deleteTrip(tripData: TripData,): void {
+    if (confirm(`Are you sure you want to delete the trip '${tripData.title}'?`)) {
+      if (tripData.id) {
+        this.tripService.deleteTrip(tripData.id)
+          .subscribe(() => {
+            console.log(`Trip '${tripData.title}' deleted successfully.`);
+            this.router.navigateByUrl('/trip-list');
 
-}
-
-addPlaceToTrip(): void {
-  if (this.tripData) {
-    this.router.navigate(['/create-place'], {
-      queryParams: { tripId: this.tripData.id ,tripHref: this.tripData.href }
-    });
-  }
-}
-
-getPlacesForTrip(tripId: string): void {
-  this.tripService.getPlacesForTrip(tripId).subscribe(
-    (places) => {
-      this.places = places;
-    },
-    (error) => {
-      console.error('Failed to retrieve places for trip:', error);
-      // Handle error scenario, such as displaying an error message
+          });
+      } else {
+        console.error('Trip ID is missing.');
+      }
     }
-  );
-}
+
+
+
+
+
+  }
+
+  addPlaceToTrip(): void {
+    if (this.tripData) {
+      this.router.navigate(['/create-place'], {
+        queryParams: { tripId: this.tripData.id, tripHref: this.tripData.href }
+      });
+    }
+  }
+
+  getPlacesForTrip(tripId: string): void {
+    this.tripService.getPlacesForTrip(tripId).subscribe(
+      (places) => {
+        this.places = places;
+      },
+      (error) => {
+        console.error('Failed to retrieve places for trip:', error);
+        // Handle error scenario, such as displaying an error message
+      }
+    );
+  }
+
+ 
+
+
 }
 

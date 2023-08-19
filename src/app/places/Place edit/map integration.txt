@@ -1,0 +1,126 @@
+Can you review my entire code and correct it accordingly? Here is my entire codes
+
+Map Service
+
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import * as L from 'leaflet';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class MapService {
+    private mapSubject: BehaviorSubject<L.Map | null> = new BehaviorSubject<L.Map | null>(null);
+    map$: Observable<L.Map | null> = this.mapSubject.asObservable();
+
+    constructor() { }
+
+    initMap(latitude: number, longitude: number, placeName: string): void {
+        const mymap = L.map('map').setView([latitude, longitude], 13);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(mymap);
+
+        L.marker([latitude, longitude]).addTo(mymap);
+
+        const popupContent = `<b>${placeName}</b><br>Latitude: ${latitude}, Longitude: ${longitude}`;
+        L.popup()
+            .setLatLng([latitude, longitude])
+            .setContent(popupContent)
+            .openOn(mymap);
+
+        this.mapSubject.next(mymap);
+    }
+}
+
+
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { PlaceApiService } from '../place-api.service';
+import { MapService } from '../map-create/map.service';
+
+@Component({
+  selector: 'app-create-place-v2',
+  templateUrl: './create-place-v2.component.html',
+  styleUrls: ['./create-place-v2.component.css']
+})
+export class CreatePlaceV2Component implements OnInit {
+  @Input() latitude: number | undefined;
+  @Input() longitude: number | undefined;
+  @Input() placeName: string | undefined;
+  placeForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, 
+    private mapService: MapService,
+    private placeService: PlaceApiService) {
+    this.placeForm = this.formBuilder.group({
+      name: '',
+      description: '',
+      latitude: null,
+      longitude: null
+    });
+  }
+
+  ngOnInit(): void {
+    this.mapService.initMap(this.latitude || 0, this.longitude || 0, this.placeName || '');
+
+    this.mapService.map$.subscribe((map) => {
+      if (map) {
+        // Use the map instance here
+      }
+    });
+  }
+
+  onLocationSelected(location: { latitude: number; longitude: number }): void {
+    this.placeForm.patchValue({
+      latitude: location.latitude,
+      longitude: location.longitude
+    });
+  }
+
+  onSubmit(): void {
+    const name = this.placeForm.get('name')?.value;
+    const description = this.placeForm.get('description')?.value;
+    if (this.placeForm.valid) {
+      const formData = this.placeForm.value;
+      this.placeService.createPlace(formData).subscribe(
+        (response) => {
+          console.log('Place created:', response);
+          // Reset the form or navigate to a different page
+        },
+        (error) => {
+          console.error('Error creating place:', error);
+        }
+      );
+    }
+    this.mapService.initMap(this.latitude || 0, this.longitude || 0, this.placeName || '');
+  }
+
+
+}
+
+
+<div>
+    <h2>Create a New Place</h2>
+    <form [formGroup]="placeForm" (ngSubmit)="onSubmit()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name" />
+  
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description"></textarea>
+      <div id="map" style="width: 60%; height: 400px;"></div> 
+  
+      <app-map-create
+        [latitude]="placeForm.value.latitude"
+        [longitude]="placeForm.value.longitude"
+        (locationSelected)="onLocationSelected($event)"
+      ></app-map-create>
+  
+      <button type="submit">Create Place</button>
+    </form>
+  </div>
+  
+
+

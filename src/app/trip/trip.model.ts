@@ -1,4 +1,5 @@
 import { PlaceData } from "../places/place.model";
+import { User } from '../users/user.model';
 
 export interface Trip {
   id?: string;
@@ -19,6 +20,7 @@ export interface Trip {
     createdAt?: string;
     updatedAt?: string;
     places?: PlaceData[];
+    user?: User[];
   }
   
   export interface TripWithPlaces extends TripData {

@@ -1,23 +1,26 @@
-<div class=" ">
-  <form>
-    <input type="text" placeholder="search trip" #filter>
-<button class="primary" type="button" (click)="searchTripResults(filter.value)">Search</button>
-  </form>
+<div class="container">
+  <mat-form-field>
+    <input matInput [formControl]="searchControl" placeholder="Search trip">
+  </mat-form-field>
 
-    <app-trip
-      *ngFor="let trip of filteredTripList"
-      [tripData]="trip">
-    </app-trip>
-  </div>
+  <mat-form-field>
+    <mat-label>Sorting</mat-label>
+    <mat-select [formControl]="sortingControl">
+      <mat-option value="">-Select-</mat-option>
+      <mat-option value="title">Trip Title (Ascending)</mat-option>
+      <mat-option value="-title">Trip Title (Descending)</mat-option>
+      <mat-option value="createdAt">Trip Date (Ascending)</mat-option>
+      <mat-option value="-createdAt">Trip Date (Descending)</mat-option>
+      <mat-option value="user.name">Traveler (Ascending)</mat-option>
+      <mat-option value="-user.name">Traveler (Descending)</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
 
-  <!--
-  <div class="container">
-    <h2>Trip List</h2>
-    <div *ngFor="let trip of tripList">
-      <h3>{{ trip.title }}</h3>
-      <p>{{ trip.description }}</p>
-      <p>Places visited: {{ trip['places']?.length || 0 }}</p>
-      <a [routerLink]="['/trip-details', trip.id]">View Details</a>
-    </div>
-  </div>
-  -->
+<mat-paginator [length]="paginator ? paginator.length : 0" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]"
+  (page)="onPageChange($event)" >
+</mat-paginator>
+
+<div class="">
+  <app-trip *ngFor="let tripData of tripList" [tripData]="tripData"></app-trip>
+</div>

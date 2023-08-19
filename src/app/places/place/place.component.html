@@ -7,7 +7,7 @@
         
         <div class="card-body">
           <h5 class="card-title">{{placeData.name}}</h5>
-          <p class="card-text"> {{placeData.description}}</p>
+          <p class="card-text"> {{placeData.description | slice:0:50 }}</p>
                     
           <a [routerLink]="['/place-details', placeData.id]">Learn More</a>
         </div>

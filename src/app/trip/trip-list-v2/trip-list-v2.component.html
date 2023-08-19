@@ -1,0 +1,91 @@
+
+
+<div style="margin: 15px">
+    <div style="display: flex">
+      <mat-form-field appearance="fill">
+        <mat-label>Sorting</mat-label>
+        <mat-select [formControl]="sortingControl">
+          
+          <mat-option value="">-Select-</mat-option>
+          <mat-option value="title-desc">Trip Title (Descending)</mat-option>
+          <mat-option value="title-asc">Trip Title (Ascending)</mat-option>
+          <mat-option value="date-desc">Trip Date (Descending)</mat-option>
+          <mat-option value="date-asc">Trip Date (Ascending)</mat-option>
+        </mat-select>
+        
+      </mat-form-field>
+
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          [formControl]="searchControl"
+          placeholder="Search trips..."
+        >
+       
+      </div>
+     
+  <!--
+      <mat-form-field class="example-form-field">
+        <mat-label>Searching </mat-label>
+        <input matInput type="text" >
+        <button  matSuffix mat-icon-button aria-label="Clear"  (click)="searchTrip(searchControl.value)" >
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+
+      -->
+<!--
+      <mat-paginator [length]="tripList.length" [pageSize]="pageSize" [pageSizeOptions]="[2, 5, 10, 15]" aria-label="Select page" (page)="onPageChange($event)">
+    </mat-paginator>
+-->
+    </div>
+
+    <mat-paginator [length]="tripList.length" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50, 100]"
+    (page)="onPageChange($event)">
+</mat-paginator>
+    <div class="">
+      <app-trip *ngFor="let tripData of tripList" [tripData]="tripData">
+      
+      </app-trip>
+      
+  
+  
+    </div>
+
+
+<!--
+<div class=" ">
+    <form>
+        <input type="text" placeholder="search trip" #filter>
+        <button class="primary" type="button" (click)="searchTrip(filter.value)">Search</button>
+    </form>
+    <div>
+        <select class="form-select form-select-sm w-25 mb-2" aria-label="Large select example"
+            [formControl]="sortingControl">
+            <option selected>Sort by</option>
+            <option value="title-desc">Trip Title (Descending)</option>
+            <option value="title-asc">Trip Title (Ascending)</option>
+            <option value="date-desc">Trip Date (Descending)</option>
+            <option value="date-asc">Trip Date (Ascending)</option>
+            <option value="traveler-desc">Traveler (Descending)</option>
+            <option value="traveler-asc">Traveler (Ascending)</option>
+        </select>
+        <div class="input-group mb-3">
+            <select name="" id="">
+
+            </select>
+
+            <input type="text" class="form-control" placeholder="Searching" [formControl]="searchControl ">
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="searchTrip(filter.value)">
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
+
+    </div>
+
+    <app-trip *ngFor="let trip of filteredTripList" [tripData]="trip">
+    </app-trip>
+</div>
+-->
+
