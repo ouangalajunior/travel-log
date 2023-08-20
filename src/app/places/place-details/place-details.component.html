@@ -8,6 +8,8 @@
       <p>Place Created: {{placeData.createdAt | date}}</p>
       <p>Place update: {{placeData.updatedAt | date}}</p>
       
+      <a [routerLink]="['/trip-list', placeData.tripId]">See related trip</a>
+
       <app-map [latitude]="placeData.location.coordinates[1]" [longitude]="placeData.location.coordinates[0]" [placeName]="placeData.name"></app-map>
 
       

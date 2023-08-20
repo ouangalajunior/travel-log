@@ -2,12 +2,14 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 
+//Introduce ng-container with ngIf directive to display logout button only after user looged in successfully.
+//change auth service to public to allow template access.
 @Component({
   selector: "app-logout-button",
-  template: '<button (click)="logout()" class="btn btn-primary">Logout</button>',
+  template: '<ng-container *ngIf="auth.isAuthenticated$() | async"> <button (click)="logout()" class="btn btn-primary">Logout</button> </ng-container>',
 })
 export class LogoutButtonComponent {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(public auth: AuthService, private router: Router) {}
 
   logout(): void {
     this.auth.logout();
