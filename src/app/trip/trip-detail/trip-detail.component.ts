@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TripData } from '../trip.model';
 import { TripService } from '../trip-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,6 +6,8 @@ import { PlaceData } from 'src/app/places/place.model';
 import { PlaceApiService } from 'src/app/places/place-api.service';
 import { UserApiService } from 'src/app/users/user-api.service';
 import { User } from 'src/app/users/user.model';
+import { AuthService } from 'src/app/auth/auth.service';
+
 
 @Component({
   selector: 'app-trip-detail',
@@ -13,14 +15,20 @@ import { User } from 'src/app/users/user.model';
   styleUrls: ['./trip-detail.component.css']
 })
 export class TripDetailComponent implements OnInit {
+  
   tripData: TripData | undefined;
   places: PlaceData[] = [];
-  user: User[] = [];
+  //user: User[] = [];
+  user: User| undefined;
+  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private tripService: TripService,
     private placeService: PlaceApiService,
+    private userService: UserApiService,
+    private authService: AuthService
     
 
   ) { }
@@ -28,6 +36,7 @@ export class TripDetailComponent implements OnInit {
     const tripId = this.route.snapshot.paramMap.get('id');
     if (tripId) {
       this.retrieveTrip();
+      this.getCurrentUser();
 
     }
 
@@ -62,6 +71,17 @@ export class TripDetailComponent implements OnInit {
               }
             );
           }
+        }
+//Get current user in order to display or not edit, delete and add place buttons
+        getCurrentUser(): void {
+          this.authService.getUser$().subscribe(
+            (user) => {
+              this.user = user;
+            },
+            (error) => {
+              console.error('Failed to get current user:', error);
+            }
+          );
         }
       
   
