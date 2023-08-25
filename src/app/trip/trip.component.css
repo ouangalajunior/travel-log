@@ -1,0 +1,38 @@
+
+  
+  .trip-card {
+    
+    
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .trip-card:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .trip-header {
+    margin-bottom: 10px;
+  }
+  
+  .trip-date {
+    font-size: 14px;
+    color: #888888;
+  }
+  
+  .trip-description {
+    margin-bottom: 15px;
+  }
+  
+  .trip-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #888888;
+  }
+  

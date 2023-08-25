@@ -116,31 +116,6 @@ export class TripService {
     );
   }
 
-  //get Method for sorting test on trip list v2
-  /*
-    get(sort: string, search: string): Observable<TripData[]> {
-  
-      let url = `${environment.apiUrl}/trips`
-      if (sort) {
-        url = `${url}?sort=${sort}`
-  
-      } 
-      if (search) {
-        //if (url.indexOf("?") < -1) {
-        //  url = `${url}&search=${search}`
-        //} else {
-          url = `${url}?search=${search}`
-       // }
-  
-      }
-  
-  
-      return this.http.get<TripData[]>(url).pipe(
-  
-      );
-  
-    }
-    */
   
 
   get(sort: string, currentPage: number, pageSize: number): Observable<HttpResponse<any>> {
@@ -159,47 +134,7 @@ export class TripService {
   }
 
 
- /*
-  searchTrip(search: string): Observable<TripData[]> {
-    let url = `${environment.apiUrl}/trips`
-    if (search) {
-      if (url.indexOf("?") < -1) {
-        url = `${url}&search=${search}`
-      } else {
-        url = `${url}?search=${search}`
-      }
 
-    }
-
-    return this.http.get<TripData[]>(url).pipe();
-
-
-  }
-*/
-/*
-
-get(sort: string, search: string = ''): Observable<TripData[]> {
-  let url = `${environment.apiUrl}/trips`;
-  
-  if (sort) {
-    url += `?sort=${sort}`;
-  }
-  if (search) {
-    url += `&search=${search}`;
-  }
-  
-  return this.http.get<TripData[]>(url);
-}
-*/
-/*
-searchTrips(search: string): Observable<TripData[]> {
-  const params = {
-    search // Add the search parameter to the query
-  };
-  
-  return this.http.get<TripData[]>(`${environment.apiUrl}/trips?search=${search}`);
-}
-*/
 
 //get request method for   search, sort and pagination
 
@@ -216,6 +151,19 @@ getTripSearch(sort: string, page: number, pageSize: number, search?:string,
   }
 
   return this.http.get<TripData[]>(url, { observe: 'response' });
+}
+
+
+getRecentTrips(): Observable<TripData[]> {
+  return this.http.get<TripData[]>(`${environment.apiUrl}/trips`, {
+    params: {
+      sort: 'createdAt',
+      
+     page: '1',  // Added _page parameter
+   //   limit: '5'
+   pageSize:'5'
+    }
+  });
 }
 }
 

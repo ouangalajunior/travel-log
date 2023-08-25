@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TripData } from 'src/app/trip/trip.model';
 
 import { TripService } from 'src/app/trip/trip-api.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 
@@ -15,6 +16,7 @@ import { TripService } from 'src/app/trip/trip-api.service';
 })
 export class UserDetailsComponent implements OnInit {
   user: User | undefined;
+  currentUser: User | undefined;
   tripList: TripData[] = [];
   
   constructor ( 
@@ -22,9 +24,11 @@ export class UserDetailsComponent implements OnInit {
     private router: Router,
     private userApiService: UserApiService,
     private tripService: TripService,
+    private authService: AuthService
     ){ }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
+    this.getCurrentUser();
     /*
     if(id){
       this.userApiService.retrieveUser(id).subscribe(
@@ -73,5 +77,19 @@ export class UserDetailsComponent implements OnInit {
       
 
   }
+
+  // Get the current logged-in user for comparison
+  getCurrentUser(): void {
+    this.authService.getUser$().subscribe(
+      (user) => {
+        this.currentUser = user;
+      },
+      (error) => {
+        console.error('Failed to get current user:', error);
+      }
+    );
+  }
+
+
 
 }

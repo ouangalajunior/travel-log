@@ -1,0 +1,17 @@
+.carousel-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px; /* Set the desired height for the images */
+  }
+  
+  .carousel-item {
+    text-align: center;
+    background-color: #f8f9fa; /* Set a background color for spacing */
+  }
+  
+  .carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background for captions */
+    color: white;
+    padding: 10px;
+  }

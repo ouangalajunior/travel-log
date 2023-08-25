@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <carousel>
+          <slide *ngFor="let place of recentPlaces">
+            <div class="carousel-inner">
+              <img [src]="place.pictureUrl" alt="{{ place.name }}">
+            </div>
+            <div class="carousel-caption">
+              <h3>{{ place.name }}</h3>
+              <p>{{ place.description }}</p>
+            </div>
+          </slide>
+        </carousel>
+      </div>
+    </div>
+  </div>
+  

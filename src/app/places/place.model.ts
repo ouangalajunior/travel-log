@@ -27,3 +27,4 @@ export interface Place {
     createdAt?: string;
     updatedAt?: string;
   }
+

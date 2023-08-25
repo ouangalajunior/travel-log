@@ -15,28 +15,31 @@ export class UserApiService {
 
   constructor(private http: HttpClient) { }
 
+  //Method to load all user
   loadAllUsers$(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.apiUrl}/users`);
   }
 
+  //Method to register a new user
   registerUser(user: User): Observable<User> {
     return this.http.post<any>(`${environment.apiUrl}/users`, user);
   }
-
+//Method to retrieve one user information
   retrieveUser(id: string): Observable<User> {
     return this.http.get<User>(`${environment.apiUrl}/users/${id}`,)
 
   }
 
-
+//method to delete user account
   deleteUser(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}/users/${id}`);
   }
-
+ //Method to update user information
   updateUser(user: User): Observable<User> {
     return this.http.patch<User>(`${environment.apiUrl}/users/${user.id}`, user);
   }
 
+  //method to associate user with a trip
   getUserForTrip(tripId: string): Observable<User[]> {
     return this.http.get<User[]>(`${environment.apiUrl}/users?tripId=${tripId}`);
 

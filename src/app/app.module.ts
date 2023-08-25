@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 
 
 import { AuthModule } from "./auth/auth.module";
-import { DummyPageComponent } from './dummy-page/dummy-page.component';
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ApiTokenInterceptorService } from "./auth/api-token-interceptor.service";
 
@@ -51,6 +51,10 @@ import { CreatePlaceV2Component } from './places/create-place-v2/create-place-v2
 import { MapCreateComponent } from './places/map-create/map-create.component';
 import { MapService } from './places/map.service';
 
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { PictureCarousselComponent } from './homepage/picture-caroussel/picture-caroussel.component';
+import { RecentTripsListComponent } from './trip/recent-trips-list/recent-trips-list.component';
+
 
 
 
@@ -59,7 +63,7 @@ import { MapService } from './places/map.service';
 @NgModule({
   declarations: [
     AppComponent,
-    DummyPageComponent,
+    
    
     UserRegistrationComponent,
     HeaderComponent,
@@ -88,6 +92,8 @@ import { MapService } from './places/map.service';
     TripListV3Component,
     CreatePlaceV2Component,
     MapCreateComponent,
+    PictureCarousselComponent,
+    RecentTripsListComponent,
     
     
     //TripSearchComponent,
@@ -106,7 +112,8 @@ import { MapService } from './places/map.service';
     MatInputModule,
     MatPaginatorModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CarouselModule.forRoot(),
     
    
   ],

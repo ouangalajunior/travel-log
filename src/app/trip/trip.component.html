@@ -1,22 +1,18 @@
-<div class="container">
-  <a class="text-decoration-none fs-5 text-secondary " routerLink="/trip-list/{{tripData.id}}">
-    <div class="bg-light p-2 w-50">
-      <div>
-        <h3>{{tripData.title}}</h3>
-        <p>{{tripData.createdAt | date}}</p>
-        <p>{{tripData.description | slice:0:50 }}</p>
 
+<div class="container text-center">
+  <a class="text-decoration-none fs-5 text-secondary " routerLink="/trip-list/{{tripData.id}}">
+    <div class="trip-card">
+      <div class="trip-header">
+        <h3>{{tripData.title}}</h3>
+        <p class="trip-date">{{tripData.createdAt | date}}</p>
       </div>
-      <div>
+      <div class="trip-description">
+        <p>{{tripData.description | slice:0:100 }}</p>
+      </div>
+      <div class="trip-footer">
         <p class="fs-6">By: {{ user?.name }}</p>
         <p class="fs-6">Places visited: {{tripData.placesCount}}</p>
-      
-        
-
       </div>
-
-
     </div>
-
   </a>
 </div>

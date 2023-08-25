@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./place-edit.component.css']
 })
 export class PlaceEditComponent implements OnInit {
+ 
 
   placeData: PlaceData | undefined;
   constructor(

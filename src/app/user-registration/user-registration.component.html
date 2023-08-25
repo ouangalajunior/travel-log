@@ -1,30 +1,38 @@
 <div class="container">
-    <h1> Travel Log v2</h1>
-    
+    <h1> Travel Log</h1>
+
 </div>
 
 
 <div class="container bg-light p-5">
-
     <h2>Register new User</h2>
-    <form (submit)="registerUser()">
+    <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
         <div class="mb-3 form-group">
-            <!--We keep the label as Username instead of name. -->
-            <label for="name" class="form-label">Username</label>
-            <input type="text" class="form-control w-50" name="name" id="name" #titleField="ngModel" required [(ngModel)]="newUser.name" />
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control w-50" id="name" formControlName="name" />
+            <div *ngIf="registrationForm.get('name')?.hasError('required')" class="text-danger">
+                username required
+
+            </div>
 
         </div>
-        <div>
+        <div class="mb-3 form-group">
             <label for="password" class="form-label">Password</label>
-            <input type="password"  class="form-control w-50" name="password" id="password" #descriptionField="ngModel" required
-                [(ngModel)]="newUser.password" />
-
+            <input type="password" class="form-control w-50" id="password" formControlName="password" />
+            <div *ngIf="registrationForm.get('password')?.hasError('required')" class="text-danger">
+                Password is required.
+            </div>
+            <div *ngIf="registrationForm.get('password')?.hasError('minlength')" class="text-danger">
+                Password should be at least 4 characters long.
+            </div>
         </div>
-
         <div>
-            <button type="submit" class="btn btn-primary my-3">Update </button>
-
+            <button type="submit" class="btn btn-primary my-3">Register</button>
         </div>
     </form>
-    Already have an account? Please login <a href="/login">here</a>
+    <div *ngIf="accountCreated" class="alert alert-success mt-3">
+        Your account has been created successfully!
+      </div>
+    
+    Already have an account? Please login <a [routerLink]="['/login']">here</a>
 </div>

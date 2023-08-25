@@ -23,6 +23,10 @@ export class UserCurrentComponent implements OnInit{
         this.currentUser = user;
         if (user) {
           console.log('Current user:', user.name);
+          //set time to hide current user message in the header after 1 min log in
+          setTimeout(() => {
+            this.currentUser = undefined;
+          }, 60000);
         } else {
           console.log('No user logged in.');
         }

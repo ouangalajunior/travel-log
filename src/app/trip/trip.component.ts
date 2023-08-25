@@ -17,7 +17,7 @@ export class TripComponent implements OnInit  {
   @Input() tripData!: TripData;
   placesList: PlaceData[] = []; // List of places associated with the trip
   user: User| undefined;
-  place: PlaceData [] = [];
+ 
   
   constructor(
     private userService: UserApiService,
@@ -25,9 +25,11 @@ export class TripComponent implements OnInit  {
     private route: ActivatedRoute,
     private router: Router,
     
+    
   ) {}
   ngOnInit(): void {
     this.retrieveUser();
+    
 
     
   }
@@ -49,7 +51,6 @@ export class TripComponent implements OnInit  {
    
   }
 
-
-
+ 
   
 }

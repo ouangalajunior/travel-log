@@ -20,15 +20,19 @@
             <input type="number" class="form-control w-50" id="longitude" name="longitude" required
                 [(ngModel)]="placeData!.location.coordinates[0]" />
         </div>
-
         <div class="mb-3">
-            <label for="tripId" class="form-label">Trip Id</label>
-            <input type="text" class="form-control w-50" id="tripId" name="tripId" [ngModel]="placeData!.tripId" readonly />
+            <label for="pictureUrl" class="form-label">Picture</label>
+            <input type="text" class="form-control w-50" id="pictureUrl" name="pictureUrl" [(ngModel)]="placeData!.pictureUrl" />
         </div>
 
         <div class="mb-3">
-            <label for="tripHref" class="form-label">Trip Href</label>
-            <input type="text" class="form-control w-50" id="tripHref" name="tripHref" [ngModel]="placeData!.tripHref" readonly />
+            
+            <input type="hidden" class="form-control w-50" id="tripId" name="tripId" [ngModel]="placeData!.tripId" readonly />
+        </div>
+
+        <div class="mb-3">
+            
+            <input type="hidden"  class="form-control w-50" id="tripHref" name="tripHref" [ngModel]="placeData!.tripHref" readonly />
             
         </div>
         <!--
@@ -42,11 +46,10 @@
         <input type="text" id="tripHref" name="tripHref"  [(ngModel)]="newPlace.tripHref" />
       </div>
 -->
-        <div class="mb-3">
-            <label for="pictureUrl" class="form-label">Picture</label>
-            <input type="text" class="form-control w-50" id="pictureUrl" name="pictureUrl" [(ngModel)]="placeData!.pictureUrl" />
-        </div>
+        
 
         <button type="submit" class="btn btn-primary m-3">Update Place</button>
         </form>
+
+        
 </div>

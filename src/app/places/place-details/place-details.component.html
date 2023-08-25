@@ -14,7 +14,8 @@
 
       
       
-     <button (click)="editPlace()" class="btn btn-primary m-3">Edit Place</button>
+     <button *ngIf="user && trip && trip.userId === user.id" (click)="editPlace()" class="btn btn-primary m-3">Edit Place</button>
+     <button *ngIf="user && trip && trip.userId === user.id" (click)="deletePlace(placeData)" class="btn btn-primary m-3">Delete Place</button>
     </div>
   
   

@@ -21,6 +21,7 @@ export interface Trip {
     updatedAt?: string;
     places?: PlaceData[];
     user?: User[];
+    lastPlacePicture?: string;
   }
   
   export interface TripWithPlaces extends TripData {

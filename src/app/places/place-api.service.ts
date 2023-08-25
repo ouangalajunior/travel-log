@@ -29,7 +29,9 @@ export class PlaceApiService {
     return this.http.get<PlaceData>(`${environment.apiUrl}/places/${id}`, )
     
   }
-
+  deletePlace(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/places/${id}`);
+  }
   updatePlace( place: Place): Observable<Place> {
     return this.http.patch<Place>(`${environment.apiUrl}/places/${place.id}`,place);
   }
@@ -53,5 +55,20 @@ export class PlaceApiService {
 
     return this.http.get<PlaceData[]>(url, { observe: 'response' });
   }
+
+  //get recent places for caroussel
+
+  getRecentPlaces(): Observable<PlaceData[]> {
+    return this.http.get<PlaceData[]>(`${environment.apiUrl}/places`, {
+      params: {
+        sort: 'createdAt',
+        
+       page: '1',  // Added _page parameter
+     //   limit: '5'
+     pageSize:'5'
+      }
+    });
+  }
+  
 
 }

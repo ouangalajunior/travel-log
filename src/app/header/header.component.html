@@ -1,27 +1,64 @@
+<!--
 <div class=" container header-container bg-light">
-    
-    <a href="/homepage" class="logo"> TripLog</a>
-    
-    <nav>
-        <a routerLink="/homepage">Home</a>
-        |
-        <a routerLink="/trip-create">New Trip</a>
-        |
-        <a routerLink="/trip-list">Trips</a>
-        |
-        <a routerLink="/place-list">Places</a>
-        |
-        <a routerLink="/user-list">Users</a>
-        |
-        <a routerLink="/mytrip">myTrip</a>
-        |
-        <a routerLink="/trip-listv2">TripsV2</a>
 
-    </nav>
+  <a routerLink="/homepage" class="logo fs-2">TravelLog</a>
 
-    <div>
-        <app-logout-button></app-logout-button>
+  <nav class="navbar">
+    <button routerLink="/homepage" class="nav-btn">Home</button>
+    <button routerLink="/trip-create" class="nav-btn">New Trip</button>
+    <button routerLink="/trip-list" class="nav-btn">Trips</button>
+    <button routerLink="/place-list" class="nav-btn">Places</button>
+    <button routerLink="/user-list" class="nav-btn">Users</button>
+    <button routerLink="/mytrip" class="nav-btn">My Trip</button>
+  </nav>
+
+  <app-user-current></app-user-current>
+  <div>
+    
+  </div>
+
+
+</div>
+-->
+
+
+<div class="container header-container bg-light">
+  <nav class="navbar navbar-expand-lg">
+    <a routerLink="/homepage" class="logo navbar-brand fs-2 me-5">TravelLog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav  ms-5">
+        <li class="nav-item bg-light">
+          <a routerLink="/homepage" class="nav-btn nav-link ">Home</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/trip-create" class="nav-btn nav-link">New Trip</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/trip-list" class=" nav-btn nav-link">Trips</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/place-list" class="nav-btn nav-link">Places</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/user-list" class=" nav-btn nav-link">Users</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/mytrip" class="nav-btn nav-link">MyTrip</a>
+        </li>
+      </ul>
     </div>
-    <app-user-current></app-user-current>
-   
+  </nav>
+  <app-user-current></app-user-current>
+ 
+  <ng-container *ngIf="auth.isAuthenticated$() | async; else loginButton">
+    <button (click)="logout()" class="nav-btn">Logout</button>
+  </ng-container>
+  
+  <ng-template #loginButton>
+    <a routerLink="/login" class="nav-btn">Login</a>
+  </ng-template>
 </div>

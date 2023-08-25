@@ -1,0 +1,13 @@
+
+  
+  .search-field,
+  .sort-field {
+    flex: 1;
+    margin-right: 10px;
+  }
+  .trip-list-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
