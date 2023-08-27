@@ -1,8 +1,22 @@
 .card-container {
-    
-    gap: 20px;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
-  
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
  
+.search-field,
+.sort-field {
+  flex: 1;
+  margin-right: 10px;
+  height: 23vh;
   
+}
+
+.place-list-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }

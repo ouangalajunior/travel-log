@@ -1,0 +1,14 @@
+.search-field,
+.sort-field {
+  flex: 1;
+  margin-right: 10px;
+  height: 23vh;
+  
+}
+
+.user-list-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+  }

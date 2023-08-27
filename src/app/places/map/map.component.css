@@ -1,6 +1,10 @@
 #map { 
     height: 90vh;
-    width: 600px;
+    width: 150vh;
     margin: auto;
+    max-width: 100%; /* Ensure the image doesn't exceed its container */
+    max-height: 400px; /* Set a maximum height for the image */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
 }

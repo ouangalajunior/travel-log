@@ -1,29 +1,36 @@
 <div class="container">
-    <mat-form-field>
-        <input matInput [formControl]="searchControl" placeholder="Search places">
-      </mat-form-field>
-    
-      <mat-form-field>
-        <mat-label>Sorting</mat-label>
-        <mat-select [formControl]="sortingControl">
-          <mat-option value="">-Select-</mat-option>
-    
-          <mat-option value="createdAt">By place creation Date (Ascending)</mat-option>
-          <mat-option value="-createdAt">By place creation Date (Descending)</mat-option>
-          <mat-option value="name">Place name (Ascending)</mat-option>
-          <mat-option value="-name">Place name (Descending)</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    
-    <mat-paginator [length]="paginator ? paginator.length : 0" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]"
-      (page)="onPageChange($event)">
-    </mat-paginator>
+ <div class="place-list-controls">
+  <mat-form-field class="search-field">
+    <input matInput [formControl]="searchControl" placeholder="Search places">
+  </mat-form-field>
 
-    <h2>Place List</h2>
-    <div class="card-container">
-        <app-place *ngFor=" let place of placeList"
-        [placeData]="place">
+  <mat-form-field class="sort-field ">
+    <mat-label>Sorting</mat-label>
+    <mat-select [formControl]="sortingControl">
+      <mat-option value="">-Select-</mat-option>
 
-        </app-place>
-    </div>
+      <mat-option value="createdAt">By place creation Date (Ascending)</mat-option>
+      <mat-option value="-createdAt">By place creation Date (Descending)</mat-option>
+      <mat-option value="name">Place name (Ascending)</mat-option>
+      <mat-option value="-name">Place name (Descending)</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+ </div>
+  
+</div>
+
+
+
+<div class="container bg-light bg-gradient">
+  <h3 class="text-center text-secondary">Discover places shared by our community</h3>
+  <div class="card-container">
+    <app-place *ngFor=" let place of placeList" [placeData]="place">
+
+    </app-place>
+  </div>
+  <mat-paginator [length]="paginator ? paginator.length : 0" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]"
+  (page)="onPageChange($event)">
+</mat-paginator>
+
+</div>

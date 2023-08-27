@@ -111,6 +111,7 @@ import { RecentTripsListComponent } from './trip/recent-trips-list/recent-trips-
     MatSelectModule,
     MatInputModule,
     MatPaginatorModule,
+    
     ReactiveFormsModule,
     BrowserAnimationsModule,
     CarouselModule.forRoot(),

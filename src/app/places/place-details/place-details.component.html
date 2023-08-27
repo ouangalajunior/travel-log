@@ -1,22 +1,53 @@
+<!--
 <div class="container">
-    <div *ngIf="placeData">
-      <h2>Place Details</h2>
-      <p><strong>Name</strong> {{ placeData.name }}</p>
-      <img [src]="placeData.pictureUrl" alt="{{placeData.name}}" class="w-50"  />
-      <p><strong>Description:</strong> {{ placeData.description }}</p>
-     
-      <p>Place Created: {{placeData.createdAt | date}}</p>
-      <p>Place update: {{placeData.updatedAt | date}}</p>
-      
-      <a [routerLink]="['/trip-list', placeData.tripId]">See related trip</a>
+  <div *ngIf="placeData">
+    <h2>Place Details</h2>
+    <p><strong>Name</strong> {{ placeData.name }}</p>
+    <img [src]="placeData.pictureUrl" alt="{{placeData.name}}" class="w-50" />
+    <p><strong>Description:</strong> {{ placeData.description }}</p>
 
-      <app-map [latitude]="placeData.location.coordinates[1]" [longitude]="placeData.location.coordinates[0]" [placeName]="placeData.name"></app-map>
+    <p>Place Created: {{placeData.createdAt | date}}</p>
+    <p>Place update: {{placeData.updatedAt | date}}</p>
 
-      
-      
-     <button *ngIf="user && trip && trip.userId === user.id" (click)="editPlace()" class="btn btn-primary m-3">Edit Place</button>
-     <button *ngIf="user && trip && trip.userId === user.id" (click)="deletePlace(placeData)" class="btn btn-primary m-3">Delete Place</button>
-    </div>
-  
-  
+    <a [routerLink]="['/trip-list', placeData.tripId]">See related trip</a>
+
+    <app-map [latitude]="placeData.location.coordinates[1]" [longitude]="placeData.location.coordinates[0]"
+      [placeName]="placeData.name"></app-map>
+
+
+
+    <button *ngIf="user && trip && trip.userId === user.id" (click)="editPlace()" class="btn btn-secondary m-3">Edit
+      Place</button>
+    <button *ngIf="user && trip && trip.userId === user.id" (click)="deletePlace(placeData)"
+      class="btn btn-secondary m-3">Delete Place</button>
   </div>
+
+
+</div>
+-->
+
+<div class="container">
+  <div *ngIf="placeData" class="place-details-container">
+    <h2 class="mb-3 text-center text-secondary">Place details</h2>
+    <div class="place-info">
+      <div class="place-image ">
+        <img [src]="placeData.pictureUrl" alt="{{ placeData.name }}" class="w-100" />
+      </div>
+      <div class="place-description">
+        <h3>{{ placeData.name }}</h3>
+        <p>{{ placeData.description }}</p>
+        <p><strong>Place Created:</strong> {{ placeData.createdAt | date }}</p>
+        <p><strong>Place Updated:</strong> {{ placeData.updatedAt | date }}</p>
+        <a [routerLink]="['/trip-list', placeData.tripId]">See related trip</a>
+      </div>
+    </div>
+
+    <app-map [latitude]="placeData.location.coordinates[1]" [longitude]="placeData.location.coordinates[0]"
+      [placeName]="placeData.name"></app-map>
+
+    <div class="place-actions" *ngIf="user && trip && trip.userId === user.id">
+      <button (click)="editPlace()" class="btn btn-secondary m-3">Edit Place</button>
+      <button (click)="deletePlace(placeData)" class="btn btn-secondary m-3">Delete Place</button>
+    </div>
+  </div>
+</div>
