@@ -5,7 +5,7 @@
   </a>
   <ng-container *ngIf="tripData ">
     <div class="trip-details">
-      <h2>{{tripData.title}}</h2>
+      <h3 class="text-secondary">{{tripData.title}}</h3>
       <p>{{tripData.description}}</p>
       <p>Places visited: {{tripData.placesCount}}</p>
       <p>Date of trip creation: {{tripData.createdAt | date}}</p>
@@ -14,17 +14,31 @@
   </ng-container>
 
   <ng-container *ngIf="tripData.places && tripData.places.length > 0">
-    <h3 class="my-3">Places visited:</h3>
-    <ul  class="places-list">
-      <li class="text-decoration-none fs-5 text-secondary" *ngFor="let place of tripData.places">
-        <a routerLink="/place-details/{{place.id}}">
-          {{ place.name }}
-        </a>
-      </li>
-    </ul>
+    <h3 class="text-secondary my-3 text-center">Places visited</h3>
+   
+    <div class="card-container bg-light">
+
+      <div  *ngFor="let place of tripData.places">
+        <div class="card" style="width: 18rem;">
+        <img [src]="place.pictureUrl" alt="{{place.name}}" class="card-img-top"  />
+        
+        <div class="card-body">
+          <h5 class="card-title">{{place.name}}</h5>
+          <p class="card-text"> {{place.description | slice:0:50 }}</p>
+                    
+          <a [routerLink]="['/place-details', place.id]">Learn More</a>
+        </div>
+      </div>
+
+    </div>
+
+    
+  </div>
 
 
   </ng-container>
+
+ 
   <!---->
 
   <!-- *ngIf="user && tripData.userId === user.id" display or hide edit, delete and add place bttons-->

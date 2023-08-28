@@ -153,15 +153,15 @@ getTripSearch(sort: string, page: number, pageSize: number, search?:string,
   return this.http.get<TripData[]>(url, { observe: 'response' });
 }
 
-
+//methog to call 6 recent trips in homepage
 getRecentTrips(): Observable<TripData[]> {
   return this.http.get<TripData[]>(`${environment.apiUrl}/trips`, {
     params: {
       sort: 'createdAt',
       
-     page: '1',  // Added _page parameter
-   //   limit: '5'
-   pageSize:'5'
+     page: '1',  
+   
+   pageSize:'6'
     }
   });
 }

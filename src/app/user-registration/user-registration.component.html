@@ -1,11 +1,10 @@
-<div class="container">
-    <h1> Travel Log</h1>
-
-</div>
+<div class="container bg-light my-3">
+    <h1 class="text-secondary text-center "> Travel Log </h1>
+  </div>
 
 
 <div class="container bg-light p-5">
-    <h2>Register new User</h2>
+    <h3 class="text-secondary">Register new User</h3>
     <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
         <div class="mb-3 form-group">
             <label for="name" class="form-label">Name</label>
@@ -27,7 +26,7 @@
             </div>
         </div>
         <div>
-            <button type="submit" class="btn btn-primary my-3">Register</button>
+            <button type="submit" class="btn btn-secondary my-3">Register</button>
         </div>
     </form>
     <div *ngIf="accountCreated" class="alert alert-success mt-3">
