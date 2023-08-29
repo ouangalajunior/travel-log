@@ -1,10 +1,11 @@
+<!--User registration form-->
+
 <div class="container bg-light my-3">
     <h1 class="text-secondary text-center "> Travel Log </h1>
-  </div>
-
-
+</div>
 <div class="container bg-light p-5">
     <h3 class="text-secondary">Register new User</h3>
+    <!--User name form-->
     <form [formGroup]="registrationForm" (ngSubmit)="registerUser()">
         <div class="mb-3 form-group">
             <label for="name" class="form-label">Name</label>
@@ -15,6 +16,7 @@
             </div>
 
         </div>
+        <!--password form form-->
         <div class="mb-3 form-group">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control w-50" id="password" formControlName="password" />
@@ -29,9 +31,11 @@
             <button type="submit" class="btn btn-secondary my-3">Register</button>
         </div>
     </form>
+
+    <!--conditional account creation success-->
     <div *ngIf="accountCreated" class="alert alert-success mt-3">
         Your account has been created successfully!
-      </div>
-    
+    </div>
+    <!--redirection ling to login page-->
     Already have an account? Please login <a [routerLink]="['/login']">here</a>
 </div>

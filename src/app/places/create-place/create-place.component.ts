@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Place } from '../place.model';
+import { PlaceData } from '../place.model';
 import { PlaceApiService } from '../place-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MapService } from '../map.service';
@@ -67,7 +67,7 @@ export class CreatePlaceComponent implements OnInit {
   createPlace(): void {
     const formData = this.locationForm.value;
 
-    const newPlace: Place = {
+    const newPlace: PlaceData = {
       name: formData.name,
       description: formData.description,
       location: {

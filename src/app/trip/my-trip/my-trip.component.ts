@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { TripData } from '../trip.model';
 import { TripService } from '../trip-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TripWithPlaces } from '../trip.model';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/users/user.model';
 @Component({
   selector: 'app-my-trip',
   templateUrl: './my-trip.component.html',
-  styleUrls: ['./my-trip.component.css']
+  
 })
+//to list trip belong to the current logged in user
 export class MyTripComponent implements OnInit {
   tripList: TripData[] = [];
   currentUser: User | undefined;
@@ -23,15 +23,14 @@ export class MyTripComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentUser();
-   
-   
 }
+//method to get the current user
 getCurrentUser(): void {
   this.authService.getUser$().subscribe(
     (user) => {
       this.currentUser = user;
       if (user) {
-        console.log('Current user:', user.name);
+      //  console.log('Current user:', user.name);
 
         // If there is a user and user.id is defined, fetch their trips
         if (user.id) {

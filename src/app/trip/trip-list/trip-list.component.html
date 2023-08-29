@@ -1,14 +1,24 @@
+<!--Trip list-->
 <div class="trip-list-container">
+  <!--carousel with 5 recents places pictures add to the application-->
   <app-picture-caroussel></app-picture-caroussel>
+  <div class="container">
+    <h2 class="text-center text-secondary">Trip list</h2>
+  </div>
   <div class="trip-list-controls container ">
+    <!--mat form control  for trip search-->
     <mat-form-field class="search-field">
       <input matInput [formControl]="searchControl" placeholder="Search trip">
     </mat-form-field>
-
+    <!--mat form control  for user/traveler sort-->
     <mat-form-field class="sort-field ">
       <mat-label>Sorting</mat-label>
       <mat-select [formControl]="sortingControl">
         <mat-option value="">-Select-</mat-option>
+        <!--For simplicity we limit sort option with title, createdAt, user.name. Other options available are
+          "placesCount",  "updatedAt", "id", "href", "user.name", , "user.href"
+        
+        -->
         <mat-option value="title">Trip Title (Ascending)</mat-option>
         <mat-option value="-title">Trip Title (Descending)</mat-option>
         <mat-option value="createdAt">Trip Date (Ascending)</mat-option>
@@ -18,12 +28,12 @@
       </mat-select>
     </mat-form-field>
   </div>
-  
-
+  <!--trip list -->
   <div class="trip-list">
     <app-trip *ngFor="let tripData of tripList" [tripData]="tripData"></app-trip>
   </div>
 
+  <!--Pagination-->
   <mat-paginator class="container " [length]="paginator ? paginator.length : 0" [pageSize]="pageSize"
     [pageSizeOptions]="[10, 25, 50, 100]" (page)="onPageChange($event)">
   </mat-paginator>

@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.css']
+  
 })
 export class UserEditComponent implements OnInit {
   user: User | undefined;
@@ -23,12 +23,14 @@ export class UserEditComponent implements OnInit {
 
   }
 
+  //method to retrieve user
   private retrieveUser(id: string): void {
 
     this.userApiService.retrieveUser(id).subscribe(
       (response) => {
         this.user = response;
-        console.log(response);
+// remove the comment to see the response in the console
+      //  console.log(response);
       },
       (error) => {
         console.error('Failed to retrieve trip details:', error);
@@ -38,12 +40,13 @@ export class UserEditComponent implements OnInit {
 
   }
 
+//Nethod to update  user
   updateUser(): void {
 
     if (this.user) {
       this.userApiService.updateUser(this.user).subscribe(
         () => {
-          console.log('Place updated successfully!');
+          alert('Traveler updated successfully!');
           this.router.navigate(['/user-list', this.user?.id]);
         },
         (error) => {

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { TripData } from '../trip.model';
 import { TripService } from '../trip-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 
 
@@ -11,9 +10,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-trip-edit',
   templateUrl: './trip-edit.component.html',
-  styleUrls: ['./trip-edit.component.css']
+  
 })
 export class TripEditComponent implements OnInit {
+  //trip data and error message variable
   tripData: TripData | undefined;
   errorMessage: string | undefined;
 
@@ -21,7 +21,7 @@ export class TripEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tripService: TripService,
-    private snackBar: MatSnackBar
+    
   ) {}
 
   ngOnInit(): void {
@@ -29,11 +29,13 @@ export class TripEditComponent implements OnInit {
     this.retrieveTrip(tripId);
   }
 
-  private retrieveTrip(id: string) {
+  //method to retrieve trip
+   retrieveTrip(id: string) {
     this.tripService.retrieveTrip(id).subscribe(
       (response) => {
         this.tripData = response;
-        console.log(response);
+       //remove comment to  see response in console
+       // console.log(response);
       },
       (error) => {
         console.error('Failed to retrieve trip details:', error);
@@ -41,6 +43,8 @@ export class TripEditComponent implements OnInit {
       }
     );
   }
+
+  //Mehtod to update trip with error handling
 
   updateTrip(): void {
     if (this.tripData) {
@@ -60,17 +64,11 @@ export class TripEditComponent implements OnInit {
           } else if (error.status === 401){
 
           } 
-          
-          else if (error.status === 422){
+            else if (error.status === 422){
             errorMessage = 'The request contains semantically invalid properties.';
-
           }
-
-          
-          
          this.errorMessage = errorMessage;
-         //this.snackBar.open(errorMessage, 'Dismiss', { duration: 5000 });
-         setTimeout(() => {
+                  setTimeout(() => {
           this.errorMessage = undefined;
         }, 5000);
          

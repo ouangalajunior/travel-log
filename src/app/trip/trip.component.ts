@@ -29,10 +29,7 @@ export class TripComponent implements OnInit  {
   ) {}
   ngOnInit(): void {
     this.retrieveUser();
-    
-
-    
-  }
+      }
 
   
 //Methode to retrieve user and associate it to trip

@@ -1,28 +1,19 @@
+<!--my trip template (trip list belong to the current llogged in user)-->
 <div class="container" *ngIf="currentUser">
-    <h2>{{ currentUser.name }}'trips list</h2>
-
-    <ng-container *ngIf="currentUser.trips && currentUser.trips.length > 0">
-       
-
-        <div  class="text-decoration-none fs-5 text-secondary" *ngFor="let trip of currentUser.trips">
-            <a class="text-decoration-none fs-5 text-secondary " routerLink="/trip-list/{{trip.id}}">
-                <div class="bg-light p-2 w-50">
-                  <div>
-                    <h3>{{ trip.title }} </h3>
-                    <p> {{ trip.description | slice:0:50 }}</p>
-            
-                  </div>
-                </div>
-            
-              </a>
-
+  <h3 class="text-center text-secondary my-4">{{ currentUser.name }}'trips list</h3>
+  <ng-container *ngIf="currentUser.trips && currentUser.trips.length > 0">
+    <div class="text-decoration-none fs-5 text-secondary" *ngFor="let trip of currentUser.trips">
+      <a class="text-decoration-none fs-5 text-secondary " routerLink="/trip-list/{{trip.id}}">
+        <div class="bg-light p-2 ">
+          <div>
+            <h4 class="text-center">{{ trip.title }} </h4>
+            <p class="text-center"> {{ trip.description | slice:0:50 }}</p>
+          </div>
         </div>
-  
-
-    </ng-container>
-
-
-    <ng-container *ngIf="!currentUser.trips || currentUser.trips.length === 0">
-        <p>You have no trips yet.</p>
-    </ng-container>
+      </a>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!currentUser.trips || currentUser.trips.length === 0">
+    <p>You have no trips yet.</p>
+  </ng-container>
 </div>

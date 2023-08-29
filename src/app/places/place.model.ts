@@ -1,6 +1,6 @@
 import { GeoJsonPoint } from "./geojson.model";
 
-
+/*
 export interface Place {
     id?: string;
     name: string;
@@ -10,6 +10,7 @@ export interface Place {
     tripHref?: string;
     pictureUrl: string;
   }
+  */
   
 
   export interface PlaceData {

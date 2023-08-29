@@ -1,11 +1,16 @@
-
-<div class="container bg-light p-5">
+<!--Edit user form-->
+<div class="container  bg-light p-5">
+   
+    
+    
+    
+</div>
+<div class="container bg-light my-3  p-5">
     <a routerLink="/user-list/{{user!.id}}">
         <button class="btn btn-secondary ">Back</button>
 
     </a>
-
-    <h2>Update User</h2>
+    <h3 class="text-secondary my-3">Update user account</h3>
     <form (submit)="updateUser()">
         <div class="mb-3 form-group">
             <!--We keep the label as Username instead of name. -->
@@ -21,9 +26,9 @@
         </div>
 
         <div>
-            <button type="submit" class="btn btn-primary my-3">Update </button>
+            <button type="submit" class="btn btn-secondary my-3">Update </button>
 
         </div>
     </form>
-    
+
 </div>

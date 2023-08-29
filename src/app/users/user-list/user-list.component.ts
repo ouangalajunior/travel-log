@@ -13,17 +13,18 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 export class UserListComponent implements OnInit {
   userList: User [] = [];
   
-
+//Search and sort control
   sortingControl = new FormControl();
   searchControl = new FormControl();
+//Pagination variable
+  
   totalItems: number = 0;
-
   currentPage: number = 1;
   pageSize: number = 10;
   sortValue: string = '';
   searchValue: string = '';
-  //Paginator 
   
+  //Pagintor library from anfular material
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
 
@@ -31,46 +32,22 @@ export class UserListComponent implements OnInit {
     private userApiService: UserApiService
   ){}
   ngOnInit(): void {
+    // Initial call to get the user list without any search or sorting
+  this.getUsers();
+//sort user call
     this.sortingControl.valueChanges.subscribe((value) => {
       this.sortValue = value;
       this.getUsers();
     });
+
+    //search user call
     this.searchControl.valueChanges.subscribe((searchValue) => {
       this.searchValue = searchValue;
       this.getUsers();
     });
-     // Initial call to get the user list without any search or sorting
-  this.getUsers();
-
-
-      
+     
   }
-  /*
-  loadAllUsers$(){
-    this.userApiService.loadAllUsers$().subscribe(
-    (users) => {
-      this.userList= users;
-      this.filteredUserList = this.userList;
-    },
-    (error) => {
-      console.error('Failed to retrieve user list:', error);
-      // Handle error scenario, such as displaying an error message
-    }
-
-    );
-  }
-
-  searchUserResults(text: string ) {
-    if (!text.trim()) {
-      this.filteredUserList = this.userList;
-    } else {
-      this.filteredUserList = this.userList.filter(
-        (user) =>
-          user?.name.toLowerCase().includes(text.toLowerCase()) 
-      );
-    }
-  }
-  */
+  
   //Method to list all user, with search and sort options
   getUsers(): void {
     this.userApiService.getUserSearch(this.sortValue, this.currentPage, this.pageSize, this.searchValue,

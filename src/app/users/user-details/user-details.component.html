@@ -1,52 +1,46 @@
+<!--User detail template-->
 <div class="container ">
     <a routerLink="/user-list">
-        <button class="btn btn-secondary ">Traveler list</button>
-
+        <button class="btn btn-secondary  m-3">Back to Travelers list</button>
     </a>
-    <ng-container *ngIf="user">
-        <h2> Traveler Insight</h2>
-        <p>Name: {{user.name}} </p>
-        <p>Number of trips: {{user.tripsCount}}</p>
-        <p>User creation date: {{user.createdAt | date}}</p>
-        <p>User update: {{user.updatedAt | date}}</p>
-
-
-    </ng-container>
-
+    <!--User details properties-->
+    <div class="container user-details-container">
+        <ng-container *ngIf="user" class="user-details-container">
+            <div class="user-info">
+                <h2 class="mb-3 text-center text-secondary"> Traveler Insight</h2>
+                <p>Name: {{user.name}} </p>
+                <p>Number of trips: {{user.tripsCount}}</p>
+                <p>User creation date: {{user.createdAt | date}}</p>
+                <p>User update: {{user.updatedAt | date}}</p>
+            </div>
+        </ng-container>
+    </div>
+    <!--Edit and delete button availabe for the current logged in user-->
     <div class="button-container" *ngIf="user">
         <a routerLink="/user-edit/{{user.id}}">
-            <button *ngIf="currentUser && currentUser.id === user.id" class="btn btn-secondary ">Edit</button>
+            <button *ngIf="currentUser && currentUser.id === user.id" class="btn btn-secondary ">Edit Traveler</button>
         </a>
 
-        <button *ngIf="currentUser && currentUser.id === user.id" (click)="deleteUser(user)" class="btn btn-secondary  m-3"> Delete</button>
+        <button *ngIf="currentUser && currentUser.id === user.id" (click)="deleteUser(user)"
+            class="btn btn-secondary  m-3"> Delete Traveler</button>
     </div>
 </div>
-
-
-
-
-<div class="container" *ngIf="user">
-    <h3 *ngIf="currentUser && currentUser.id === user.id">Hi {{ user.name }}, here is your trips list</h3>
-
+<!--Trvaeler trip list-->
+<div class="container user-details-container" *ngIf="user">
+    <h4 *ngIf="currentUser && currentUser.id === user.id">Hi {{ user.name }}, here is your trips list</h4>
     <ng-container *ngIf="user.trips && user.trips.length > 0">
         <h3 *ngIf="currentUser && currentUser.id !== user.id">{{ user.name }}'trips list:</h3>
         <ul>
-            <li   class="text-decoration-none fs-5 text-secondary" *ngFor="let trip of user.trips">
+            <li class="text-decoration-none fs-5 text-secondary" *ngFor="let trip of user.trips">
                 <a routerLink="/trip-list/{{trip.id}}">
-                    {{ trip.title }} 
+                    {{ trip.title }}
                 </a>
             </li>
         </ul>
 
-
     </ng-container>
-
-
-
-
-
-
+    <!--directive for traveler without trip-->
     <ng-container *ngIf="!user.trips || user.trips.length === 0">
-        <p>You have no trips yet.</p>
+        <p>No trips yet.</p>
     </ng-container>
 </div>

@@ -1,14 +1,17 @@
+<!--Traveler/User list-->
+
 <div class="container">
   <div class="user-list-controls">
+    <!--mat form control  for user/traveler search-->
     <mat-form-field class="search-field">
       <input matInput [formControl]="searchControl" placeholder="Search traveler">
     </mat-form-field>
-
+ <!--mat form control  for user/traveler sort-->
     <mat-form-field class="sort-field ">
       <mat-label>Sorting</mat-label>
       <mat-select [formControl]="sortingControl">
         <mat-option value="">-Select-</mat-option>
-
+        <!--For simplicity we limit sort option with createdAt and name. Other sorting options are "tripsCount", "createdAt", "updatedAt", "id", "href"-->
         <mat-option value="createdAt">By traveler creation Date (Ascending)</mat-option>
         <mat-option value="-createdAt">By traveler creation Date (Descending)</mat-option>
         <mat-option value="name">Traveler (Ascending)</mat-option>
@@ -17,13 +20,7 @@
     </mat-form-field>
   </div>
 </div>
-
-
-
-
-
-
-
+<!--traveler list -->
 <div class="container">
   <h2 class="text-center text-secondary">Travelers list</h2>
 </div>
@@ -39,9 +36,9 @@
     </div>
 
   </a>
-
-  
 </div>
+
+<!--Pagination-->
 <div class="container">
   <mat-paginator [length]="paginator ? paginator.length : 0" [pageSize]="pageSize" [pageSizeOptions]="[10, 25, 50,100]"
     (page)="onPageChange($event)">

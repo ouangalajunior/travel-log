@@ -1,8 +1,13 @@
+<!--trip detail template-->
 <div class="container " *ngIf="tripData">
   <a routerLink="/trip-list" class="back-button">
     <button class="btn btn-secondary my-2">Back</button>
 
   </a>
+  <!--Trip details properties-->
+  <div class="container">
+    <h2 class="text-center text-secondary">Trip details</h2>
+  </div>
   <ng-container *ngIf="tripData ">
     <div class="trip-details">
       <h3 class="text-secondary">{{tripData.title}}</h3>
@@ -12,47 +17,36 @@
       <p>Last update: {{tripData.updatedAt | date}}</p>
     </div>
   </ng-container>
+  <!--Places associated to the current trip -->
 
   <ng-container *ngIf="tripData.places && tripData.places.length > 0">
     <h3 class="text-secondary my-3 text-center">Places visited</h3>
-   
+<!--Card for places-->
     <div class="card-container bg-light">
 
-      <div  *ngFor="let place of tripData.places">
+      <div *ngFor="let place of tripData.places">
         <div class="card" style="width: 18rem;">
-        <img [src]="place.pictureUrl" alt="{{place.name}}" class="card-img-top"  />
-        
-        <div class="card-body">
-          <h5 class="card-title">{{place.name}}</h5>
-          <p class="card-text"> {{place.description | slice:0:50 }}</p>
-                    
-          <a [routerLink]="['/place-details', place.id]">Learn More</a>
+          <img [src]="place.pictureUrl" alt="{{place.name}}" class="card-img-top" />
+          <div class="card-body">
+            <h5 class="card-title">{{place.name}}</h5>
+            <p class="card-text"> {{place.description | slice:0:50 }}</p>
+            <a [routerLink]="['/place-details', place.id]">Learn More</a>
+          </div>
         </div>
       </div>
-
     </div>
-
-    
-  </div>
-
-
   </ng-container>
 
- 
   <!---->
 
   <!-- *ngIf="user && tripData.userId === user.id" display or hide edit, delete and add place bttons-->
   <div class="button-container" *ngIf="tripData">
     <a routerLink="/trip-edit/{{tripData.id}}">
-      <button *ngIf="user && tripData.userId === user.id" class="btn btn-secondary ">Edit</button>
+      <button *ngIf="user && tripData.userId === user.id" class="btn btn-secondary ">Edit Trip</button>
     </a>
-
     <button *ngIf="user && tripData.userId === user.id" (click)="deleteTrip(tripData)" class="btn btn-secondary  m-3">
-      Delete</button>
-
-
+      Delete Trip</button>
   </div>
-
   <div>
     <button *ngIf="user && tripData.userId === user.id" (click)="addPlaceToTrip() " class="btn btn-secondary ">Add
       Place</button>

@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from "./auth/login-page/login-page.component";
-
 import { authGuard } from "./auth/guards/auth.guard";
-
-import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { UserRegistrationComponent } from './users/user-registration/user-registration.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { TripComponent } from './trip/trip.component';
-
 import { CreatePlaceComponent } from './places/create-place/create-place.component';
 import { PlaceListComponent } from './places/place-list/place-list.component';
 import { PlaceEditComponent } from './places/place-edit/place-edit.component';
@@ -22,63 +19,47 @@ import { UserListComponent } from './users/user-list/user-list.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { MyTripComponent } from './trip/my-trip/my-trip.component';
-import { TripListV2Component } from './trip/trip-list-v2/trip-list-v2.component';
-import { TripListV3Component } from './trip/trip-list-v3/trip-list-v3.component';
-import { CreatePlaceV2Component } from './places/create-place-v2/create-place-v2.component';
+
+
+
 
 const routes: Routes = [
- // { path: "", redirectTo: "dummy", pathMatch: "full" },
+  //default page redirection to homepage
   { path: "", redirectTo: "homepage", pathMatch: "full" },
+  //no found page redirection to homepage
   //{ path: '**', redirectTo: "homepage", pathMatch: "full" },
-  { path: "homepage", component: HomepageComponent,
-    // Prevent access to this page to unauthenticated users
-   canActivate: [authGuard],
-},
 
-  { path: "header", component: HeaderComponent,
+  {
+    path: "homepage", component: HomepageComponent,
     // Prevent access to this page to unauthenticated users
-    
+    //canActivate: [authGuard],
   },
-  { path: "footer", component: FooterComponent,
-    // Prevent access to this page to unauthenticated users
-  
-  },
+  { path: "header", component: HeaderComponent },
+  { path: "footer", component: FooterComponent },
 
-  {path: "login", component: LoginPageComponent, },
-  {path: "create-place", component: CreatePlaceComponent, },
-  {path: "trip", component: TripComponent, },
-  
-  {path: "place-details/:id", component: PlaceDetailsComponent, },
+
+  //users route
+  { path: "user-list", component: UserListComponent },
+  { path: "user-list/:id", component: UserDetailsComponent },
+  { path: "user-edit/:id", component: UserEditComponent },
+  { path: "login", component: LoginPageComponent, },
+  { path: "user-registration", component: UserRegistrationComponent, },
+
+  // New trip route
+  // Prevent access to this page to unauthenticated users
+  { path: "trip", component: TripComponent, },
+  { path: "trip-create", component: TripCreateComponent, canActivate: [authGuard] },
+  { path: "trip-list", component: TripListComponent },
+  { path: "trip-list/:id", component: TripDetailComponent },
+  { path: "trip-edit/:id", component: TripEditComponent },
+  // Prevent access to this page to unauthenticated users
+  { path: "mytrip", component: MyTripComponent, canActivate: [authGuard] },
+
+  // Place route
+  { path: "place-details/:id", component: PlaceDetailsComponent, },
   { path: 'edit-place/:id', component: PlaceEditComponent },
-  
-  {path: "place-list", component: PlaceListComponent, },
-
-  {path: "user-registration", component: UserRegistrationComponent, },
- 
- // { path: "dummy", component: DummyPageComponent,
-    // Prevent access to this page to unauthenticated users
-  //  canActivate: [authGuard],
- //},
-
-
-// New trip route
-{path:"trip-create", component:TripCreateComponent},
-{path: "trip-list", component: TripListComponent},
-{path:"trip-list/:id", component: TripDetailComponent},
-{path: "trip-edit/:id", component: TripEditComponent},
-{path: "mytrip", component: MyTripComponent},
-
-{path:"trip-listv2", component: TripListV2Component},
-{path:"trip-listv3", component: TripListV3Component},
-{path: "create-placev2", component: CreatePlaceV2Component},
-
-//users route
-{path: "user-list", component: UserListComponent},
-{path: "user-list/:id", component:UserDetailsComponent},
-{path: "user-edit/:id", component: UserEditComponent},
-
-
-
+  { path: "place-list", component: PlaceListComponent, },
+  { path: "create-place", component: CreatePlaceComponent, },
 
 
 ];

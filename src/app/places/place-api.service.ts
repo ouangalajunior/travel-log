@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable, map} from 'rxjs';
 import { environment } from "src/environments/environment";
-import { Place, PlaceData } from './place.model';
+import { PlaceData } from './place.model';
 
 
 @Injectable({
@@ -11,12 +11,12 @@ import { Place, PlaceData } from './place.model';
 export class PlaceApiService {
 
   constructor(private http: HttpClient) { }
-  createPlace(place: Place): Observable<Place> {
-    return this.http.post<Place>(`${environment.apiUrl}/places`, place,  );
+  createPlace(place: PlaceData): Observable<PlaceData> {
+    return this.http.post<PlaceData>(`${environment.apiUrl}/places`, place,  );
   }
 
-  getPlacesForTrip(tripId: string): Observable<Place[]> {
-    return this.http.get<Place[]>(`${environment.apiUrl}/places?tripId=${tripId}`);
+  getPlacesForTrip(tripId: string): Observable<PlaceData[]> {
+    return this.http.get<PlaceData[]>(`${environment.apiUrl}/places?tripId=${tripId}`);
   }
 
   getPlaces(): Observable<PlaceData[]> {
@@ -32,8 +32,8 @@ export class PlaceApiService {
   deletePlace(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}/places/${id}`);
   }
-  updatePlace( place: Place): Observable<Place> {
-    return this.http.patch<Place>(`${environment.apiUrl}/places/${place.id}`,place);
+  updatePlace( place: PlaceData): Observable<PlaceData> {
+    return this.http.patch<PlaceData>(`${environment.apiUrl}/places/${place.id}`,place);
   }
   
   getPlaceByTrip(tripId: string): Observable<PlaceData[]> {

@@ -4,7 +4,6 @@ import { TripService } from '../trip-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PlaceData } from 'src/app/places/place.model';
 import { PlaceApiService } from 'src/app/places/place-api.service';
-import { UserApiService } from 'src/app/users/user-api.service';
 import { User } from 'src/app/users/user.model';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -15,33 +14,35 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./trip-detail.component.css']
 })
 export class TripDetailComponent implements OnInit {
-  
+
   tripData: TripData | undefined;
   places: PlaceData[] = [];
   //user: User[] = [];
-  user: User| undefined;
-  
+  user: User | undefined;
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private tripService: TripService,
     private placeService: PlaceApiService,
-    private userService: UserApiService,
     private authService: AuthService
-    
+
 
   ) { }
+
   ngOnInit(): void {
     const tripId = this.route.snapshot.paramMap.get('id');
     if (tripId) {
       this.retrieveTrip();
+      //get current user logged in for edit delete buttons logic
       this.getCurrentUser();
 
     }
 
   }
 
+  // retrieve trip details method
   retrieveTrip(): void {
     const tripId = this.route.snapshot.paramMap.get('id');
     if (tripId) {
@@ -56,41 +57,36 @@ export class TripDetailComponent implements OnInit {
                   this.tripData.places = places;
                 }
               }
-
-            );
-
-         
-
-          }
-
-           
-              },
-              (error) => {
-                console.error('Failed to retrieve trip details:', error);
-                // Handle error scenario, such as displaying an error message
-              }
             );
           }
+        },
+        (error) => {
+          console.error('Failed to retrieve trip details:', error);
+          // Handle error scenario, such as displaying an error message
         }
-//Get current user in order to display or not edit, delete and add place buttons
-        getCurrentUser(): void {
-          this.authService.getUser$().subscribe(
-            (user) => {
-              this.user = user;
-            },
-            (error) => {
-              console.error('Failed to get current user:', error);
-            }
-          );
-        }
-      
-  
+      );
+    }
+  }
+  //Get current user in order to display or not edit, delete and add place buttons
+  getCurrentUser(): void {
+    this.authService.getUser$().subscribe(
+      (user) => {
+        this.user = user;
+      },
+      (error) => {
+        console.error('Failed to get current user:', error);
+      }
+    );
+  }
+
+  //delete trip method 
+
   deleteTrip(tripData: TripData,): void {
     if (confirm(`Are you sure you want to delete the trip '${tripData.title}'?`)) {
       if (tripData.id) {
         this.tripService.deleteTrip(tripData.id)
           .subscribe(() => {
-            console.log(`Trip '${tripData.title}' deleted successfully.`);
+            alert(`Trip '${tripData.title}' deleted successfully.`);
             this.router.navigateByUrl('/trip-list');
 
           });
@@ -125,7 +121,7 @@ export class TripDetailComponent implements OnInit {
     );
   }
 
- 
+
 
 
 }

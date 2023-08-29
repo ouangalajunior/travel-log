@@ -5,7 +5,7 @@ import { User } from '../user.model';
 @Component({
   selector: 'app-user-current',
   templateUrl: './user-current.component.html',
-  styleUrls: ['./user-current.component.css']
+  
 })
 export class UserCurrentComponent implements OnInit{
  currentUser: User | undefined;
@@ -17,12 +17,15 @@ export class UserCurrentComponent implements OnInit{
   ngOnInit(): void {
     this.getCurrentUser();
   }
+
+  //Method to get current user
   getCurrentUser(): void {
     this.authService.getUser$().subscribe(
       (user) => {
         this.currentUser = user;
         if (user) {
-          console.log('Current user:', user.name);
+          //remove comment to display current user in console
+          //console.log('Current user:', user.name);
           //set time to hide current user message in the header after 1 min log in
           setTimeout(() => {
             this.currentUser = undefined;

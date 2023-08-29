@@ -1,33 +1,32 @@
-<div class="container">
+<!--trip registration form-->
+<div class="container bg-light my-3">
     <h3 class="text-secondary text-center">Create new Trip</h3>
 
     <form (submit)="createTrip()">
+        <!--trip title form-->
         <div class="mb-3">
             <label for="trip-title" class="form-label">Trip title</label>
-            <input type="text" name="trip-title" class="form-control w-75" id="trip-title" #titleField="ngModel" required
-                [(ngModel)]="newTrip.title" />
+            <input type="text" name="trip-title" class="form-control w-75" id="trip-title" #titleField="ngModel"
+                required [(ngModel)]="newTrip.title" />
+            <!--Error handling-->
             <p *ngIf="titleField.hasError('required') && titleField.touched">
                 Trip title is required
             </p>
         </div>
         <div class="mb-3">
+            <!--trip description form-->
             <label for="trip-description" class="form-label">Descritpion</label>
-            <input type="textarea" name="trip-description" class="form-control w-75 py-5" id="trip-description" #descriptionField="ngModel" required
-                [(ngModel)]="newTrip.description" />
+            <input type="textarea" name="trip-description" class="form-control w-75 py-5" id="trip-description"
+                #descriptionField="ngModel" required [(ngModel)]="newTrip.description" />
+            <!--Error handling-->
             <p *ngIf="descriptionField.hasError('required') && descriptionField.touched">
                 Description is required
             </p>
         </div>
-    
         <div>
             <button type="submit" class="btn btn-secondary">Create </button>
-    
+
         </div>
     </form>
 
 </div>
-
-
-
-
-

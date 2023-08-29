@@ -6,17 +6,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-trip-create',
   templateUrl: './trip-create.component.html',
-  styleUrls: ['./trip-create.component.css']
+
 })
 export class TripCreateComponent {
 
-  
+  //new trip 
   newTrip: TripData = {
-  
-    title: '',
+      title: '',
     description: '',
-  
-  };
+    };
   constructor(
     private tripService: TripService,
     private router: Router
@@ -24,9 +22,10 @@ export class TripCreateComponent {
 
   
 
+//create trip method
   createTrip(): void {
     this.tripService.createTrip(this.newTrip).subscribe(createdTrip => {
-      console.log('Trip created successfully!');
+      alert('Trip created successfully!');
       this.newTrip = {
        
         title: '',

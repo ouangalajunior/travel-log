@@ -3,7 +3,6 @@ import { User } from '../user.model';
 import { UserApiService } from '../user-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TripData } from 'src/app/trip/trip.model';
-
 import { TripService } from 'src/app/trip/trip-api.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -28,29 +27,22 @@ export class UserDetailsComponent implements OnInit {
     ){ }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
+    //get current user logged in for edit delete buttons logic
     this.getCurrentUser();
-    /*
-    if(id){
-      this.userApiService.retrieveUser(id).subscribe(
-        (user) => {
-          this.user= user;
-        }
-
-      );
-      
-    }
-    */
+    
     if (id) {
       this.getUserTrip(); // Call the getUser() method to fetch user and trips
     }
       
   }
+  
+  // method to delete user
   deleteUser(user: User){
-    if(confirm(`Are you sure you want to delete user '${user.name}'?`)){
+    if(confirm(`Are you sure you want to delete user '${user.name}'? All trips and places belong to this user will be deleted`)){
       if(user.id){
         this.userApiService.deleteUser(user.id).subscribe(() => {
-          console.log(`User '${user.name}' deleted successfully.`);
-          this.router.navigateByUrl('/users-list');
+          alert(`User '${user.name}' deleted successfully.`);
+          this.router.navigateByUrl('/login');
          
         });
     } else {
@@ -59,6 +51,7 @@ export class UserDetailsComponent implements OnInit {
       }
     }
 
+  //method to get user's trips
     getUserTrip(): void {
       const id = this.route.snapshot.paramMap.get('id');
       if(id){ this.userApiService.retrieveUser(id).subscribe(
