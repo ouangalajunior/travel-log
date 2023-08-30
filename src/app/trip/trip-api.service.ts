@@ -36,7 +36,7 @@ export class TripService {
   updateTrip(trip: TripData): Observable<TripData> {
     return this.http.patch<TripData>(`${environment.apiUrl}/trips/${trip.id}`, trip);
   }
-// Method for trip deletino
+// Method for trip deletion
 
   deleteTrip(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.apiUrl}/trips/${id}`);

@@ -12,12 +12,14 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 })
 export class PlaceListComponent implements OnInit {
   placeList: PlaceData[] = [];
-  filteredPlaceList: PlaceData[] = [];
+  //filteredPlaceList: PlaceData[] = [];
+ 
+  //Search and sort control
 
   sortingControl = new FormControl();
   searchControl = new FormControl();
   totalItems: number = 0;
-
+//Pagination variable declaration
   currentPage: number = 1;
   pageSize: number = 10;
   sortValue: string = '';
@@ -31,42 +33,20 @@ export class PlaceListComponent implements OnInit {
   constructor(private placeService: PlaceApiService) {}
 
   ngOnInit(): void {
+    //sort
     this.sortingControl.valueChanges.subscribe((value) => {
       this.sortValue = value;
       this.getPlaces();
     });
+    //search
     this.searchControl.valueChanges.subscribe((searchValue) => {
       this.searchValue = searchValue;
       this.getPlaces();
     });
-     // Initial call to get the user list without any search or sorting
+     // Initial call to get the place list without any search or sorting
   this.getPlaces();
   }
-/*
-  getPlaces(): void {
-    this.placeService.getPlaces().subscribe((places) => {
-      this.placeList = places;
-      this.filteredPlaceList = this.placeList;
-    },
-    (error) => {
-      console.error('Failed to retrieve place list:', error);
-      // Handle error scenario, such as displaying an error message
-    }
-    );
-  }
 
-  searchPlaceResults(text: string ) {
-    if (!text.trim()) {
-      this.filteredPlaceList = this.placeList;
-    } else {
-      this.filteredPlaceList = this.placeList.filter(
-        (placeData) =>
-          placeData?.name.toLowerCase().includes(text.toLowerCase()) ||
-          placeData?.description.toLowerCase().includes(text.toLowerCase())
-      );
-    }
-  }
-  */
 
    //Method to list all user, with search and sort options
    getPlaces(): void {

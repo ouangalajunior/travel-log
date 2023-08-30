@@ -26,7 +26,7 @@ export class TripListComponent implements OnInit {
   searchValue: string = '';
   titleValue: string = '';
 
- //Pagintor library from anfular material
+ //Pagintor library from angular material
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
 
   constructor( private tripService: TripService,) { }

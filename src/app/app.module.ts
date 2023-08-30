@@ -34,7 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MapCreateComponent } from './places/map-create/map-create.component';
+
 import { MapService } from './places/map.service';
 import { MapComponent } from './places/map/map.component';
 
@@ -71,7 +71,7 @@ import { RecentTripsListComponent } from './trip/recent-trips-list/recent-trips-
     UserCurrentComponent,
     MyTripComponent,
     MapComponent,
-    MapCreateComponent,
+    
     PictureCarousselComponent,
     RecentTripsListComponent,
 

@@ -1,12 +1,10 @@
-<div class="container bg-light my-3">
-  <h1 class="text-secondary text-center "> Travel Log </h1>
-</div>
+<!--login form-->
 
-<div class="container bg-light p-5">
+
+<div class="container bg-light p-5 my-3">
   <h3 class="text-secondary">Login</h3>
-
-
   <form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
+    <!--user name with validation error-->
     <div class="mb-3 form-group">
       <label for="username" class="form-label">Username</label>
       <input type="text" name="username" class="form-control w-50" id="username" #usernameField="ngModel" required
@@ -15,6 +13,7 @@
         Username is required
       </p>
     </div>
+    <!--password with validation error-->
     <div>
       <label for="password">Password</label>
       <input type="password" name="password" class="form-control w-50" id="passwrod" #passwordField="ngModel" required
@@ -23,7 +22,6 @@
         Password is required
       </p>
     </div>
-
     <div>
       <button type="submit" [disabled]="loginForm.invalid" class="btn btn-secondary my-3">Log in</button>
       <p *ngIf="loginError">
@@ -31,8 +29,6 @@
       </p>
     </div>
   </form>
-
+  <!--switch user registration form-->
   Not yet register? Please register <a href="/user-registration">here</a>
-
-
 </div>

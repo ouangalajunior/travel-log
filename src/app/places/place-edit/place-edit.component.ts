@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-place-edit',
   templateUrl: './place-edit.component.html',
-  styleUrls: ['./place-edit.component.css']
+  
 })
 export class PlaceEditComponent implements OnInit {
 
@@ -36,7 +36,7 @@ export class PlaceEditComponent implements OnInit {
   ngOnInit(): void {
     const placeId = this.route.snapshot.params['id'];
     this.retrievePlace(placeId);
-
+//map integration
     if (!navigator.geolocation) {
       console.log('Location is not supported');
     }
@@ -50,6 +50,7 @@ export class PlaceEditComponent implements OnInit {
     this.mapService.initMap();
   }
 
+//retrieve place method
   private retrievePlace (id: string): void {
 
     this.placeService.retrievePlace(id).subscribe(
@@ -65,6 +66,7 @@ export class PlaceEditComponent implements OnInit {
 
   }
 
+  // update place method
   updatePlace (): void {
 
     if (this.placeData) {

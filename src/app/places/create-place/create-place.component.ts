@@ -51,6 +51,7 @@ export class CreatePlaceComponent implements OnInit {
       });
     });
 
+    //map integration to get current user position
     if (!navigator.geolocation) {
       console.log('Location is not supported');
     }
@@ -64,6 +65,7 @@ export class CreatePlaceComponent implements OnInit {
     this.mapService.initMap();
   }
 
+  //create place method
   createPlace(): void {
     const formData = this.locationForm.value;
 
@@ -78,7 +80,6 @@ export class CreatePlaceComponent implements OnInit {
       tripHref: formData.tripHref, // Fill this with the appropriate trip Href
       pictureUrl: formData.pictureUrl
     };
-
 
     // Call the API service to create a new place
     this.placeService.createPlace(newPlace).subscribe(
@@ -95,57 +96,6 @@ export class CreatePlaceComponent implements OnInit {
     console.log('Form submitted:', formData);
   }
 
-
-  /*
-  createPlace(): void {
-    this.placeService.createPlace(this.newPlace).subscribe(
-      (createdPlace) => {
-        console.log('Place created successfully:', createdPlace);
-        // Optionally, navigate to the place details page or any other action after successful creation
-        this.newPlace = {
-          name: '',
-          description: '',
-          location: { type: 'Point', coordinates: [0, 0] },
-          tripId: this.newPlace.tripId, // Set tripId from newPlace object
-          tripHref: this.newPlace.tripHref, // Set tripHref from newPlace object
-          pictureUrl: ''
-        };
-      },
-      (error) => {
-        console.error('Failed to create place:', error);
-        // Handle error scenario, such as displaying an error message
-      }
-    );
-  }
-  */
-
-
-
-
-
-/*
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['latitude']) {
-      this.locationForm.patchValue({ latitude: changes['latitude'].currentValue });
-    }
-    if (changes['longitude']) {
-      this.locationForm.patchValue({ longitude: changes['longitude'].currentValue });
-    }
-    if (changes['placeData']) {
-      const newPlaceData = changes['placeData'].currentValue;
-      if (newPlaceData) {
-        this.locationForm.patchValue({
-          name: newPlaceData.name,
-          description: newPlaceData.description,
-          latitude: newPlaceData.location.coordinates[1],
-          longitude: newPlaceData.location.coordinates[0]
-        });
-      }
-    }
-  }
-
-
-*/
 
 
 

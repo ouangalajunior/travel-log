@@ -17,7 +17,7 @@ export class MapService {
   longitude$ = this.longitudeSubject.asObservable();
 
   constructor() {}
-
+//map method using leaflet
   initMap(): void {
     navigator.geolocation.getCurrentPosition((position) => {
       const coords = position.coords;

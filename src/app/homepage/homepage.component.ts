@@ -8,7 +8,7 @@ import { PlaceData } from "../places/place.model";
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  
 })
 export class HomepageComponent implements OnInit {
   recentPlaces: PlaceData[] = [];
@@ -19,21 +19,8 @@ export class HomepageComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
-    // Ask the service to make an API call on component initialisation
-    /*
-    this.userApi.loadAllUsers$().subscribe({
-      next: (users) => console.log("Users", users),
-      error: (error) => console.warn("Error", error),
-    });
-*/
-    this.placeService.getRecentPlaces().subscribe(
-      (places) => {
-        this.recentPlaces = places;
-      },
-      (error) => {
-        console.error('Failed to retrieve recent places:', error);
-      }
-    );
+
+ 
   }
   
   }

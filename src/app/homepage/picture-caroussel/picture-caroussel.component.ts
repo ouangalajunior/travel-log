@@ -13,6 +13,7 @@ export class PictureCarousselComponent implements OnInit {
   constructor(private placeService: PlaceApiService) { }
 
   ngOnInit(): void {
+    //call for 5 recents places
     this.placeService.getRecentPlaces().subscribe(places => {
       this.recentPlaces = places;
     });

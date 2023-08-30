@@ -1,27 +1,4 @@
-<!--
-<div class=" container header-container bg-light">
-
-  <a routerLink="/homepage" class="logo fs-2">TravelLog</a>
-
-  <nav class="navbar">
-    <button routerLink="/homepage" class="nav-btn">Home</button>
-    <button routerLink="/trip-create" class="nav-btn">New Trip</button>
-    <button routerLink="/trip-list" class="nav-btn">Trips</button>
-    <button routerLink="/place-list" class="nav-btn">Places</button>
-    <button routerLink="/user-list" class="nav-btn">Users</button>
-    <button routerLink="/mytrip" class="nav-btn">My Trip</button>
-  </nav>
-
-  <app-user-current></app-user-current>
-  <div>
-    
-  </div>
-
-
-</div>
--->
-
-
+<!--nav bar with toggle for responsive-->
 <div class="container header-container bg-light">
   <nav class="navbar navbar-expand-lg">
     <a routerLink="/homepage" class="logo navbar-brand fs-2 me-5">TravelLog</a>
@@ -53,12 +30,13 @@
     </div>
   </nav>
   <app-user-current></app-user-current>
+  <!--display logout and login button based on  current authenticated user-->
 
   <ng-container *ngIf="auth.isAuthenticated$() | async; else loginButton">
     <button (click)="logout()" class="nav-btn me-5">Logout</button>
   </ng-container>
 
   <ng-template #loginButton>
-    <a routerLink="/login" class="nav-btn">Login</a>
+    <a routerLink="/login" class="nav-btn text-decoration-none me-5">Login</a>
   </ng-template>
 </div>

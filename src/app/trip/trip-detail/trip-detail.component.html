@@ -8,6 +8,14 @@
   <div class="container">
     <h2 class="text-center text-secondary">Trip details</h2>
   </div>
+   <!-- *ngIf="user && tripData.userId === user.id" display or hide edit, delete and add place bttons-->
+   <div class="button-container" *ngIf="tripData">
+    <a routerLink="/trip-edit/{{tripData.id}}">
+      <button *ngIf="user && tripData.userId === user.id" class="btn btn-secondary ">Edit Trip</button>
+    </a>
+    <button *ngIf="user && tripData.userId === user.id" (click)="deleteTrip(tripData)" class="btn btn-secondary  m-3">
+      Delete Trip</button>
+  </div>
   <ng-container *ngIf="tripData ">
     <div class="trip-details">
       <h3 class="text-secondary">{{tripData.title}}</h3>
@@ -39,23 +47,9 @@
 
   <!---->
 
-  <!-- *ngIf="user && tripData.userId === user.id" display or hide edit, delete and add place bttons-->
-  <div class="button-container" *ngIf="tripData">
-    <a routerLink="/trip-edit/{{tripData.id}}">
-      <button *ngIf="user && tripData.userId === user.id" class="btn btn-secondary ">Edit Trip</button>
-    </a>
-    <button *ngIf="user && tripData.userId === user.id" (click)="deleteTrip(tripData)" class="btn btn-secondary  m-3">
-      Delete Trip</button>
-  </div>
+ 
   <div>
     <button *ngIf="user && tripData.userId === user.id" (click)="addPlaceToTrip() " class="btn btn-secondary ">Add
       Place</button>
   </div>
-
-
-
-
-
-
-
 </div>

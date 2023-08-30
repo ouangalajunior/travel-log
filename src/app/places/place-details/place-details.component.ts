@@ -31,6 +31,7 @@ export class PlaceDetailsComponent {
     this.getCurrentUser();
   }
 
+  // retieve place
   private retrievePlace(id: string) {
     this.placeService.retrievePlace(id).subscribe(
       (response) => {
@@ -44,6 +45,7 @@ export class PlaceDetailsComponent {
     );
   }
 
+  //retrieve trip related to the place
   private retrieveTrip(tripId: string) {
     this.tripService.retrieveTrip(tripId).subscribe(
       (trip) => {
@@ -55,10 +57,12 @@ export class PlaceDetailsComponent {
     );
   }
 
+  //edit place
   editPlace(): void {
     this.router.navigate(['/edit-place', this.placeData?.id]);
   }
 
+  //delete place
   deletePlace(placeData: PlaceData,): void {
     if (confirm(`Are you sure you want to delete the place '${placeData.name}'?`)) {
       if (placeData.id) {
@@ -74,7 +78,7 @@ export class PlaceDetailsComponent {
     }
   }
 
-  // Add the deletePlace method similar to the editPlace method
+  
 
   // Get current user in order to display or not edit, delete, and add place buttons
   getCurrentUser(): void {
