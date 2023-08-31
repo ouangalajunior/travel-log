@@ -19,6 +19,7 @@ export class TripDetailComponent implements OnInit {
   places: PlaceData[] = [];
   //user: User[] = [];
   user: User | undefined;
+  
 
 
   constructor(
@@ -55,6 +56,8 @@ export class TripDetailComponent implements OnInit {
               (places) => {
                 if (this.tripData) {
                   this.tripData.places = places;
+                  // Call the function to set map coordinates
+           
                 }
               }
             );
@@ -67,6 +70,7 @@ export class TripDetailComponent implements OnInit {
       );
     }
   }
+
   //Get current user in order to display or not edit, delete and add place buttons
   getCurrentUser(): void {
     this.authService.getUser$().subscribe(

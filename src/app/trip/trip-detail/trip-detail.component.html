@@ -38,15 +38,15 @@
           <div class="card-body">
             <h5 class="card-title">{{place.name}}</h5>
             <p class="card-text"> {{place.description | slice:0:50 }}</p>
-            <a [routerLink]="['/place-details', place.id]">Learn More</a>
+            <a [routerLink]="['/place-details', place.id]">Details</a>
           </div>
         </div>
       </div>
     </div>
   </ng-container>
 
-  <!---->
-
+ 
+  
  
   <div>
     <button *ngIf="user && tripData.userId === user.id" (click)="addPlaceToTrip() " class="btn btn-secondary ">Add

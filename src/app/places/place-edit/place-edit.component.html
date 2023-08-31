@@ -1,51 +1,49 @@
 <!--Edit place form-->
+
+
 <div class="container bg-light my-3">
-    <h3 class="text-secondary text-center "> Edit Place </h3>
-  </div>
-  
-<div class="container">
-   
-    
-    <form (ngSubmit)="updatePlace()" #createForm="ngForm">
+    <h3 class="text-secondary text-center">Edit Place</h3>
+</div>
+
+<div class="container bg-light">
+
+    <form (ngSubmit)="updatePlace()" [formGroup]="locationForm">
+        <!-- Form controls ... -->
         <div class="mb-3">
             <label for="name" class="form-label">Place name</label>
-            <input type="text"  class="form-control w-50" id="name" name="name" required [(ngModel)]="placeData!.name" />
+            <input type="text" id="name" formControlName="name" class="form-control w-50" />
+
         </div>
-        <div class="mb-3">
+
+        <div class="mb-3 ">
             <label for="description" class="form-label">Description</label>
-            <textarea id="description" class="form-control w-50" name="description" required [(ngModel)]="placeData!.description"></textarea>
+            <textarea id="description" formControlName="description" class="form-control w-50"></textarea>
+
         </div>
+
+        <div class="mb-3 ">
+            <label for="description" class="form-label">Picture</label>
+            <input id="pictureUrl" formControlName="pictureUrl" class="form-control w-50">
+
+        </div>
+
         <div class="mb-3">
             <label for="latitude" class="form-label">Latitude</label>
-            <input type="number" class="form-control w-50" id="latitude" name="latitude" required
-                [(ngModel)]="placeData!.location.coordinates[1]" />
+            <input type="text" id="latitude" formControlName="latitude" class="form-control w-50" />
         </div>
         <div class="mb-3">
             <label for="longitude" class="form-label">Longitude</label>
-            <input type="number" class="form-control w-50" id="longitude" name="longitude" required
-                [(ngModel)]="placeData!.location.coordinates[0]" />
-        </div>
-        <div class="mb-3">
-            <label for="pictureUrl" class="form-label">Picture</label>
-            <input type="text" class="form-control w-50" id="pictureUrl" name="pictureUrl" [(ngModel)]="placeData!.pictureUrl" />
-        </div>
-<!--Hide tripId and tripHref in the form-->
-        <div class="mb-3">
-            
-            <input type="hidden" class="form-control w-50" id="tripId" name="tripId" [ngModel]="placeData!.tripId" readonly />
+            <input type="text" id="longitude" formControlName="longitude" class="form-control w-50" />
         </div>
 
-        <div class="mb-3">
-            
-            <input type="hidden"  class="form-control w-50" id="tripHref" name="tripHref" [ngModel]="placeData!.tripHref" readonly />
-            
-        </div>
- 
-        
+        <!-- Hide tripId and tripHref in the form -->
+        <input type="hidden" formControlName="tripId" />
+        <input type="hidden" formControlName="tripHref" />
 
         <button type="submit" class="btn btn-secondary m-3">Update Place</button>
-        </form>
+    </form>
 
-        <div id="map" style="height: 400px; width: 50%;"></div>
-        
+    <!-- Map display ... -->
+
+    <div id="map" style="height: 400px; width: 50%;"></div>
 </div>
