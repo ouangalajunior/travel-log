@@ -6,22 +6,21 @@
     
 </div>
 <div class="container bg-light my-3  p-5">
-    <a routerLink="/user-list/{{user!.id}}">
+    <a routerLink="/user-list/{{user?.id}}">
         <button class="btn btn-secondary ">Back</button>
 
     </a>
     <h3 class="text-secondary my-3">Update user account</h3>
-    <form (submit)="updateUser()">
-        <div class="mb-3 form-group">
+    <form (ngSubmit)="updateUser()" [formGroup]="userForm">
+        <div class="mb-3 ">
             <!--We keep the label as Username instead of name. -->
             <label for="name" class="form-label">Username</label>
-            <input type="text" class="form-control w-50" name="name" id="name" #titleField="ngModel" required [(ngModel)]="user!.name" />
+            <input type="text" class="form-control w-50" name="name" id="name" formControlName="name" />
 
         </div>
         <div>
             <label for="password" class="form-label">Password</label>
-            <input type="password"  class="form-control w-50" name="password" id="password" #descriptionField="ngModel" required
-                [(ngModel)]="user!.password" />
+            <input type="password"  class="form-control w-50" name="password" id="password" formControlName="password" />
 
         </div>
 

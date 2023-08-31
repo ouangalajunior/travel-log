@@ -1,31 +1,36 @@
 <!--Edit trip form-->
 <div class="container bg-light p-5 my-3">
-    <a  routerLink="/trip-list/{{tripData!.id}}">
+    <a  routerLink="/trip-list/{{tripData?.id}}">
         <button class="btn btn-secondary m-3">Back</button>
 
     </a>
-    <h3 class="text-secondary my-3">Edit Trip</h3>
-    <form (ngSubmit)="updateTrip()" #tripForm="ngForm">
-      <div class="mb-3">
-        <label for="trip-title" class="form-label">Title</label>
-      <input type="text"  class="form-control w-75 "  id="title" name="title" [(ngModel)]="tripData!.title" required>
+   
+
+  <div class="container bg-light my-3">
+    <h3 class="text-secondary text-center">Edit Trip</h3>
+</div>
+  <div  class="container bg-light">
+    <form (ngSubmit)="updateTrip()" [formGroup]="tripForm">
+        <!-- Form controls ... -->
+        <div class="mb-3">
+          <label for="title" class="form-label">title</label>
+          <input type="text" id="title" formControlName="title" class="form-control w-75" />
 
       </div>
-      
-      <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-      <input type="textarea" class="form-control w-75 py-5" id="description" name="description" [(ngModel)]="tripData!.description" required/>
-  
+
+      <div class="mb-3 ">
+          <label for="description" class="form-label">Description</label>
+          <textarea id="description" formControlName="description" class="form-control w-75"></textarea>
 
       </div>
-  
-      
       <button type="submit" class="btn btn-secondary m-3">Update Trip</button>
-    </form>
 
+    </form>
+   
     <ng-container *ngIf="errorMessage">
-      <div class="error-message">
+      <div class="error-message text-warning">
         {{ errorMessage }}
       </div>
     </ng-container>
+
   </div>

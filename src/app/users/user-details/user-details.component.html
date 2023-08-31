@@ -18,11 +18,11 @@
     <!--Edit and delete button availabe for the current logged in user-->
     <div class="button-container" *ngIf="user">
         <a routerLink="/user-edit/{{user.id}}">
-            <button *ngIf="currentUser && currentUser.id === user.id" class="btn btn-secondary ">Edit Traveler</button>
+            <button *ngIf="currentUser && currentUser.id === user.id" class="btn btn-secondary ">Edit your account</button>
         </a>
 
         <button *ngIf="currentUser && currentUser.id === user.id" (click)="deleteUser(user)"
-            class="btn btn-secondary  m-3"> Delete Traveler</button>
+            class="btn btn-secondary  m-3"> Delete your account</button>
     </div>
 </div>
 <!--Trvaeler trip list-->

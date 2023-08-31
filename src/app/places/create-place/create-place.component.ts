@@ -4,7 +4,7 @@ import { PlaceData } from '../place.model';
 import { PlaceApiService } from '../place-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MapService } from '../map.service';
-
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-place',
@@ -12,16 +12,7 @@ import { MapService } from '../map.service';
   styleUrls: ['./create-place.component.css']
 })
 export class CreatePlaceComponent implements OnInit {
-  /*
-    newPlace: Place = {
-      name: '',
-      description: '',
-      location: { type: 'Point', coordinates: [0, 0] }, // Set initial GeoJsonPoint coordinates
-      tripId: '', // Fill this with the appropriate trip ID
-      tripHref: '', // Fill this with the appropriate trip Href
-      pictureUrl: ''
-    };
-  */
+ 
 
   locationForm: FormGroup = this.formBuilder.group({
     name: [''],          // Added name field
@@ -34,6 +25,7 @@ export class CreatePlaceComponent implements OnInit {
   });
   map: any;
   marker: any;
+  errorMessage: string | undefined;
 
   constructor(
     private placeService: PlaceApiService,
@@ -88,8 +80,27 @@ export class CreatePlaceComponent implements OnInit {
         // Reset the form after successful creation
         this.locationForm.reset();
       },
-      (error) => {
-        console.error('Error creating place:', error);
+      (error: HttpErrorResponse) => {
+        console.error('Failed to create:', error);
+        let errorMessage = 'An error occurred while creatting the place.';
+
+       if (error.status === 400) {
+          errorMessage = 'You are sending a bad request';
+        } else if (error.status === 401) {
+
+          errorMessage = 'You need authentication and authorization';
+        }
+        else if (error.status === 422) {
+          errorMessage = 'The request contains semantically invalid properties.';
+        }
+        else if (error.status === 415) {
+          errorMessage = 'Unsupported Media Type';
+        }
+        this.errorMessage = errorMessage;
+        setTimeout(() => {
+          this.errorMessage = undefined;
+        }, 5000);
+
       }
     );
     // Here you can submit the form data to your backend or perform any desired action

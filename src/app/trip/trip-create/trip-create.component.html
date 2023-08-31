@@ -29,4 +29,10 @@
         </div>
     </form>
 
+    <ng-container *ngIf="errorMessage">
+        <div class="error-message text-warning">
+            {{ errorMessage }}
+        </div>
+    </ng-container>
+
 </div>

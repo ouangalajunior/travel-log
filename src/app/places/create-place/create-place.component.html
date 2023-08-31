@@ -5,7 +5,7 @@
 </div>
 
 <div class="container bg-light">
-  
+
   <form [formGroup]="locationForm" (ngSubmit)="createPlace()">
     <div class="mb-3">
       <label for="name" class="form-label">Place name</label>
@@ -14,39 +14,42 @@
     </div>
 
     <div class="mb-3 ">
-      <label for="description"  class="form-label">Description</label>
-  <textarea id="description" formControlName="description" class="form-control w-50"></textarea>
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" formControlName="description" class="form-control w-50"></textarea>
 
     </div>
-   
+
     <div class="mb-3 ">
       <label for="description" class="form-label">Picture</label>
       <input id="pictureUrl" formControlName="pictureUrl" class="form-control w-50">
-    
+
     </div>
     <div class="mb-3 ">
       <label for="latitude" class="form-label">Latitude</label>
-      <input type="text" id="latitude" formControlName="latitude"  class="form-control w-50"/>
+      <input type="text" id="latitude" formControlName="latitude" class="form-control w-50" />
 
     </div>
     <div class="mb-3 ">
       <label for="longitude" class="form-label">Longitude</label>
-      <input type="text" id="longitude" formControlName="longitude" class="form-control w-50"/>
-      
+      <input type="text" id="longitude" formControlName="longitude" class="form-control w-50" />
+
     </div>
     <div class="mb-3 ">
       <!-- Trip Id 
       <label for="tripId" class="form-label">TripId</label>
       Hide tripId in the form
       -->
-      <input  type="hidden" id="tripId" formControlName="tripId" class="form-control w-50" readonly>
-     
+      <input type="hidden" id="tripId" formControlName="tripId" class="form-control w-50" readonly>
+
     </div>
-  
- 
-      
-    
-      <button type="submit" class="btn btn-secondary m-3">Submit</button>
+
+    <button type="submit" class="btn btn-secondary m-3">Submit</button>
   </form>
+  <ng-container *ngIf="errorMessage">
+    <div class="error-message text-warning">
+      {{ errorMessage }}
+    </div>
+  </ng-container>
+
   <div id="map" style="height: 400px; width: 50%;"></div>
 </div>

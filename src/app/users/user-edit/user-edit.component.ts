@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user.model';
 import { UserApiService } from '../user-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -11,11 +12,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UserEditComponent implements OnInit {
   user: User | undefined;
+  userForm: FormGroup;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private formBuilder: FormBuilder,
     private userApiService: UserApiService
-  ) { }
+  ) { 
+    this.userForm = this.formBuilder.group({
+      name: [''],
+      password: ['']
+    });
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
@@ -31,6 +40,11 @@ export class UserEditComponent implements OnInit {
         this.user = response;
 // remove the comment to see the response in the console
       //  console.log(response);
+      this.userForm.patchValue({
+        name: this.user.name,
+        password: this.user.password
+
+      });
       },
       (error) => {
         console.error('Failed to retrieve trip details:', error);
@@ -44,7 +58,14 @@ export class UserEditComponent implements OnInit {
   updateUser(): void {
 
     if (this.user) {
-      this.userApiService.updateUser(this.user).subscribe(
+
+      const formData = this.userForm.value;
+      const updatedUser : User = {
+        ...this.user,
+        name: formData.name,
+        password: formData.password,
+      }
+      this.userApiService.updateUser(updatedUser ).subscribe(
         () => {
           alert('Traveler updated successfully!');
           this.router.navigate(['/user-list', this.user?.id]);
@@ -56,8 +77,5 @@ export class UserEditComponent implements OnInit {
       );
     }
   }
-
-
-
 
 }
